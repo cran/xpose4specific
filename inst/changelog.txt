@@ -1,0 +1,169 @@
+Xpose 4 Changelog
+-----------------
+
+Latest
+  * Updated read.nm.tables so that comma separated NONMEM 7 files
+    can be read into Xpose.
+  * Changing the behaviour of xpose.multiple.plot.default. Now
+    multiple plots are returned as objects just like single plots are
+    (no automatic printing from the function that created the plot
+    list). This is accomplished by defining a new class -
+    xpose.multiple.plots - and corresponding print and show methods for
+    that class. 
+  * Updated xpose.VPC, xpose.VPC.categorical and xpose.VPC.both to
+    handle the new format of PsN vpc_results.csv
+    files. 
+  * xpose.VPC.categorical now has a new option: censored (T or F)
+    which will create BLOQ VPC plots when TRUE.  
+  * xpose.VPC.both tries to combine continuous and categorical BLOQ
+    plots.
+  * page numbers can be turned off in multiple page plots using the
+    page.numbers option (T or F).
+
+
+
+2009-11-27
+  * Updated ind.plots(), the function is much more flexible now.
+  * Added graphical options to xpose.VPC.categorical()
+  * Fixed logy=T option for xpose.VPC(Pi.ci=T,logy=T).
+  * Fixed logy=T and logx=T option (bug resulting in error).
+  * VPC changed to require that y-axis be continuous as default.
+  * Fixed classic version of parm.vs.parm() plot.
+  * Fixed runsum(). Previous version had a line between each line in
+    model file.
+  * Added a new function change.xvardef(), which replaces much of the
+    previous change functions. Thanks to Sébastien Bihorel for 
+    input which helped create this function.
+  * Added the ability to apply functions to the xaxis of plots. The
+    function options are now called funx and funy.
+  * Added support for reading NONMEM 7 table and output files. 
+  * Added functions for odd type (categorical, TTE, count) plots including
+    VPCs.
+  * Updated handling of PsN vpc output file
+  * Updated interpretation of categories in xpose.VPC.categorical()
+
+14-12-2008:
+  * cwres.vs.pred.bw() was fixed. Previously cwres.vs.pred.bw() gave the
+    same result as cwres.vs.idv.bw(). 
+  * Fixed xpose.VPC() bug causing plots to not be created in some
+    situations.  
+  * Added functionality to xpose.VPC() so that users can define their
+    own titles for each subplot if stratification is used in the VPC.
+    see ?xpose.VPC for more info.
+  * Updated method for opening graphical devices in windows to be
+    consistent with the new methods used in R version 2.8.0. 
+  * Added functionality to allow the user to plot vertical and
+    horizontal lines in histograms.  See ?xpose.panel.histogram for more
+    information. 
+  * Fixed small bug with xpose.panel.splom(). 
+
+24-10-2008: Minor maintenance release
+  * in compute.cwres() a debugging flag had been left in the file
+    resulting in R going into debugging mode when this function was
+    called. This has been fixed. 
+
+04-10-2008: Maintenance release
+  * Added ability to smooth the PI.ci "area" plots so that they match
+    the "line" plots.  See 'PI.ci.area.smooth' in
+    xpose.pandel.default()
+  * Added 'logx' and 'logy' functionality to the PI plots.
+  * Changed the par.summary and cov.summary routines and removed
+    functions doing almost the same thing (adding that functionality
+    to the current functions). 
+  * fixed GAM plot problems in xp.plot() and added more support for
+    GAM from the command line.
+  * Fixed a problem with ind.plots() when the ID variable is not
+    called ID.
+  * Changed all functions in xpose4specific that began with "abs." to
+    begin with "absval." to be consistant with the rules for generic
+    function definitions in R.
+  * Changed name of add.abs() to add.absval().
+  * Changed name of par.summary() to parm.summary().   
+  * Changed name of param.vs.cov() to parm.vs.cov().
+  * Changed name of param.vs.param() to parm.vs.parm().
+
+
+12-06-2008: Major release
+  * Added functionality for visual predictive checks
+  * Added functionality for numerical predictive checks
+
+28-09-2006: Maintenance release
+  * Added generic functions xpose.draw.table, xpose.draw.cell, xpose.get.c
+      and xpose.get.r for drawing tables using the graphics device (JW)
+  * Added specific function param.table to display parameter estimates 
+      using the graphics device (e.g. in a PDF file) (JW)
+  * Added additional specific functions for:
+      - IWRES distribution (histogram) (iwres.dist.hist)
+      - IWRES distribution (QQ) (iwres.dist.qq)
+      - ETA distribution (histogram) (ranpar.dist.hist)
+      - ETA scatterplot matrices (ranpar.splom)
+      - ETAs vs covariates (ranpar.vs.cov)
+      - Parameter tables on the graphics device (param.table)
+  * Updated compute.cwres function so that it would work without xpose 4
+      Just 'source' the file (compute.cwres.R) and it should work (AH)
+  * fixed problems with the run summary function (AH)
+  * added new general class of printing multiple plot objects on the
+    same page (AH) 
+  * Fixed bug with plotting results of GAM (AH)
+
+21-08-2006: Maintenance release
+  * Bugs in 'groups' argument fixed in xpose.plot.default,
+      dv.vs.pred.ipred, dv.preds.vs.idv (multiple values of x or
+      y not properly handled) (JW)
+  * File devices (e.g. pdf, postscript, etc) now work correctly in
+      all functions (JW)
+  * Bug in multiple-page covariate plots fixed (only the first page 
+      would display) (JW)
+  * Bug in reading table files could sometimes leave file debris, 
+      which could interfere with reading subsequent data - fixed (JW)
+  * Bug in covariate checking could sometimes cause plot functions 
+      to fail (e.g. abs.wres.vs.pred.by.cov) - fixed (JW)
+  * Bug in the classic menu system prevented display of some plots -
+      fixed (JW)
+  * Bug in the classic menu system prevented display of some plots -
+      fixed (JW)
+  * Bug in CWRES calculation fixed (AH)
+  * Bug in parameter histogram display fixed (JW)
+  * Missing values (defaults to -99) now handled correctly (JW)
+  * QQ plots no longer display categorical variables (JW)
+
+24-07-2006: Maintenance release
+  * Bug in 'subset' argument to individual plots corrected (JW)
+
+21-07-2006: Maintenance release
+  * Online documentation cleaned up (JW) 
+  * Numerous small bugs fixed (JW)
+  * *nix support added (JW)
+  * Multipage plots now create stacks of display windows, rather than
+      stacks of plots in a single window (JW)
+  * Scatterplot matrices added (JW)
+  * QQ plots for parameters and covariates added (JW)
+  * Generic functions renamed for consistency (JW)
+  
+07-06-2006: Maintenance release
+  * Bugs in CWRES application and documentation fixed (AH)
+  * Bugs in histogram functions fixed
+      - lack of defined covariates no longer causes crash
+      - customization options now work
+
+05-06-2006: Third release ("Midnight Sun")
+  * GAM added (AH)
+  * CWRES plots and functions added (AH)
+  * gam package now required
+  * Known bugs corrected
+
+23-04-2006: Second release ("Easter Bunny")
+  * SUBSET functionality fixed for all procedures
+  * Preferences, summaries and data checkout implemented
+  * Box and whisker plots now do what their preferences tell them to
+  * 'label' function renamed to 'xlabel' for compatibility
+  * Hmisc package now required
+  * Many small additions and tweaks
+  * R package functionality fixed
+
+17-01-2006: Ind.plots.R updated (AH)
+
+24-12-2005: Initial release ("Father Christmas")
+  * Xpose 4 is a completely rewritten version of Xpose 3.1, and so
+    everything has changed. 
+
