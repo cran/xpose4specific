@@ -180,7 +180,7 @@
       
 
     }
-    obj <- xpose.multiple.plot(plotList,plotTitle=NULL,max.plots.per.page=max.plots.per.page,...)
+    obj <- xpose.multiple.plot(plotList,plotTitle=NULL,max.plots.per.page=max.plots.per.page,prompt=prompt,...)
     return(obj)
 
   }

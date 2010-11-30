@@ -38,7 +38,7 @@
         return()
     } 
     
-
+    
     if(dim(object@Data)[1] != dim(object.ref@Data)[1]) {
       cat("The current database and the reference database do not have\n")
       cat("the same number of lines!\n")
@@ -76,7 +76,7 @@
                    "| (Run ", object@Runno, ")",sep="")
       ylb <- paste("|",xlabel(xvardef("pred",object.ref),object.ref),
                    "| (Run ", object.ref@Runno, ")",sep="")
-      main <- paste(ylb, " vs ", xlb, sep="")
+#      main <- paste(ylb, " vs ", xlb, sep="")
 
       xplot1 <- xpose.plot.default(xvardef("pred", object),
                                    "PRED.REF",
@@ -96,7 +96,7 @@
     if(!any(is.null(xvardef("ipred", object))) && !any(is.null(xvardef("ipred", object.ref)))) {
       xlb <- paste("|",xlabel(xvardef("ipred",object),object), "| (Run ", object@Runno, ")",sep="")
       ylb <- paste("|",xlabel(xvardef("ipred",object.ref),object.ref), "| (Run ", object.ref@Runno, ")",sep="")
-      main <- paste(ylb, " vs ", xlb, sep="")
+#      main <- paste(ylb, " vs ", xlb, sep="")
       
       xplot2 <- xpose.plot.default(xvardef("ipred", object),
                                    "IPRED.REF",
@@ -115,7 +115,7 @@
     if(!any(is.null(xvardef("cwres", object))) && !any(is.null(xvardef("cwres", object.ref)))) {
       xlb <- paste(xlabel(xvardef("idv",object),object),sep="")
       ylb <- paste("|dCWRES| (Run ", object@Runno, " - Run ",object.ref@Runno,")",sep="")
-      main <- paste(ylb, " vs ", xlb, sep="")
+#      main <- paste(ylb, " vs ", xlb, sep="")
       
       xplot3 <- xpose.plot.default(xvardef("idv", object),
                                    "dCWRES",
@@ -135,7 +135,7 @@
     if(!any(is.null(xvardef("iwres", object))) && !any(is.null(xvardef("iwres", object.ref)))) {
       xlb <- paste(xlabel(xvardef("idv",object),object),sep="")
       ylb <- paste("|dIWRES| (Run ", object@Runno, " - Run ",object.ref@Runno,")",sep="")
-      main <- paste(ylb, " vs ", xlb, sep="")
+#      main <- paste(ylb, " vs ", xlb, sep="")
       
       xplot4 <- xpose.plot.default(xvardef("idv", object),
                                    "dIWRES",

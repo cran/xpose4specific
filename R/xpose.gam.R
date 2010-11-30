@@ -97,6 +97,13 @@
             cat("Weights and data set do not have same ID values.\n")
             return()
         }
+        ## add other weighting options
+        #browser()
+        #str(wts.data)
+        #se*wpop/(wpop-se)
+        
+        
+        ## assign weight column
         wts <- wts.data[,wts.col]
     } else {
         wts <- NULL

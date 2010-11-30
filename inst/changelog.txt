@@ -2,6 +2,11 @@ Xpose 4 Changelog
 -----------------
 
 Latest
+  * Fixed bug in xpose.VPC when asking for logx=T (didn't work
+    previously).
+  * Fixed dOFV.vs.id for when there are ties in individual dOFV drops.
+
+2010-10-23
   * Updated read.nm.tables so that comma separated NONMEM 7 files
     can be read into Xpose.
   * Changing the behaviour of xpose.multiple.plot.default. Now

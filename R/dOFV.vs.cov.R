@@ -60,7 +60,7 @@ dOFV.vs.cov <-
                     ##space="right",
              #       corner=c(0.95,0.5),border=T
              #),
-             smooth=T,
+             smooth=TRUE,
              abline=c(0,0),
              ablcol="grey",
              abllwd=2,
@@ -120,7 +120,10 @@ dOFV.vs.cov <-
   #if(length(cat.covs)>0)   number.of.plots <- number.of.plots +1
   #if(length(cont.covs)>0)   number.of.plots <- number.of.plots +1
 
+
   cov.list <- list(cont.covs=cont.covs,cat.covs=cat.covs)
+  if(is.null(cat.covs))   cov.list$cat.covs <- NULL
+  if(is.null(cont.covs))   cov.list$cont.covs <- NULL
   
   plotList <- vector("list",length(cov.list))
   plot.num <- 0 # initialize plot number

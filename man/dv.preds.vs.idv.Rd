@@ -85,7 +85,7 @@ xpdb5 <- xpose.data(5)
 dv.preds.vs.idv(xpdb5)
 
 ## Custom colours and symbols, no user IDs
-dv.preds.vs.idv(xpdb5, cex=0.6, pch=8, col=1, ids=NULL)
+dv.preds.vs.idv(xpdb5, cex=0.6, pch=8, col=1, ids=FALSE)
 }
 
 }

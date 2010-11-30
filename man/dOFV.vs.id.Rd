@@ -42,10 +42,10 @@ dOFV.vs.id(xpdb1,
 }
 \arguments{
   \item{xpdb1}{
-Xpose data object for first NONMEM run
+Xpose data object for first NONMEM run ("new" run)
 }
   \item{xpdb2}{
-Xpose data object for Second NONMEM run
+Xpose data object for Second NONMEM run ("reference" run)
 }
   \item{sig.drop}{
 What is a significant drop of OFV?

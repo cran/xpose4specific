@@ -96,7 +96,7 @@ dOFV.vs.id <-
     ##ofv2-ofv1
 
 
-    comp.frame$rnk <- rank(comp.frame$d.obj)
+    comp.frame$rnk <- rank(comp.frame$d.obj,ties.method="random")
     ##comp.frame[comp.frame$rnk==74,]
     ##comp.frame[comp.frame$rnk==1,]
 
@@ -105,6 +105,7 @@ dOFV.vs.id <-
     id.decrease<- c(NA)
     increase.sum <- c(d.ofv)
     decrease.sum <- c(d.ofv)
+
     for(i in 1:max.rank){
         ##i=1
 

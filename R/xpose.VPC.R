@@ -98,7 +98,7 @@
         change.cat.cont(object) <- c(idv.var)
       }
     }
-    
+
     ## decide on the conditioning
     if (is.null(by) && num.tables!=1){
       ## get conditioning veriable name
@@ -131,8 +131,8 @@
 
         tmp.label <- xpose.create.label(dv.var,
                                         object,
-                                        fun=funy,
-                                        logx=logy,...)
+                                        funy,
+                                        logy,...)
         
         if(file.info$pred.corr && !file.info$var.corr){
           tmp.label <- paste(tmp.label,"\n(Pred Corr)")
@@ -222,8 +222,8 @@
       } else {
         tmp.label <- xpose.create.label(dv.var,
                                         object,
-                                        fun=funy,
-                                        logx=logy,...)
+                                        funy,
+                                        logy,...)
         
         if(file.info$pred.corr && !file.info$var.corr){
           tmp.label <- paste(tmp.label,"\n(Pred Corr)")

@@ -61,7 +61,7 @@
   if(!any(is.null(xvardef("pred", object))) && !any(is.null(xvardef("pred", object.ref)))) {
     xlb <- paste(xlabel(xvardef("pred",object),object), " (Run ", object@Runno, ")",sep="")
     ylb <- paste(xlabel(xvardef("pred",object.ref),object.ref), " (Run ", object.ref@Runno, ")",sep="")
-    main <- paste(ylb, " vs ", xlb, sep="")
+  #  main <- paste(ylb, " vs ", xlb, sep="")
    
     xplot1 <- xpose.plot.default(xvardef("pred", object),
                         "PRED.REF",
@@ -81,7 +81,7 @@
   if(!any(is.null(xvardef("ipred", object))) && !any(is.null(xvardef("ipred", object.ref)))) {
     xlb <- paste(xlabel(xvardef("ipred",object),object), " (Run ", object@Runno, ")",sep="")
     ylb <- paste(xlabel(xvardef("ipred",object.ref),object.ref), " (Run ", object.ref@Runno, ")",sep="")
-    main <- paste(ylb, " vs ", xlb, sep="")
+#    main <- paste(ylb, " vs ", xlb, sep="")
    
     xplot2 <- xpose.plot.default(xvardef("ipred", object),
                         "IPRED.REF",
@@ -101,7 +101,7 @@
   if(!any(is.null(xvardef("cwres", object))) && !any(is.null(xvardef("cwres", object.ref)))) {
     xlb <- paste(xlabel(xvardef("cwres",object),object), " (Run ", object@Runno, ")",sep="")
     ylb <- paste(xlabel(xvardef("cwres",object.ref),object.ref), " (Run ", object.ref@Runno, ")",sep="")
-    main <- paste(ylb, " vs ", xlb, sep="")
+ #   main <- paste(ylb, " vs ", xlb, sep="")
    
     xplot3 <- xpose.plot.default(xvardef("cwres", object),
                         "CWRES.REF",
@@ -121,7 +121,7 @@
   if(!any(is.null(xvardef("iwres", object))) && !any(is.null(xvardef("iwres", object.ref)))) {
     xlb <- paste(xlabel(xvardef("iwres",object),object), " (Run ", object@Runno, ")",sep="")
     ylb <- paste(xlabel(xvardef("iwres",object.ref),object.ref), " (Run ", object.ref@Runno, ")",sep="")
-    main <- paste(ylb, " vs ", xlb, sep="")
+  #  main <- paste(ylb, " vs ", xlb, sep="")
    
     xplot4 <- xpose.plot.default(xvardef("iwres", object),
                         "IWRES.REF",

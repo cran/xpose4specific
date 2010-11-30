@@ -62,7 +62,7 @@ dOFV1.vs.dOFV2 <-
                     ##space="right",
              #       corner=c(0.95,0.5),border=T
              #),
-             smooth=FALSE,
+             smooth=NULL,
              abline=c(0,1),
              ablcol="grey",
              abllwd=2,
@@ -159,7 +159,7 @@ dOFV1.vs.dOFV2 <-
                               xpdb1,
                               onlyfirst=T,
                               inclZeroWRES=T,
-                              smooth=smooth,
+                              smooth=NULL,
                               lmline=lmline,
                               abline=abline,
                               ablcol=ablcol,
