@@ -111,7 +111,8 @@
                    ...)
 
       if (mark.outside.data){
-        outside.data <- subset(npc.table,outside.PI == "*")
+        outside.data <- npc.table[npc.table$outside.PI == "*",]
+        #outside.data <- subset(npc.table,outside.PI == "*")
         if(dim(outside.data)[1]>0){
           panel.xyplot(outside.data$PI,outside.data$observed,
                        col=out.col,#"red",

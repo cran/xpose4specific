@@ -122,7 +122,7 @@
   if(family == "gaussian") {
     gam3 <- gam(gamform,data=gamdata)
   } else {
-    gam3 <- gam(gamform,data=gamdata,family=quasi(link=identity,var="mu^2"))
+    gam3 <- gam(gamform,data=gamdata,family=quasi(link=identity,variance="mu^2"))
   }
 
   disp <- summary(gam3)$dispersion

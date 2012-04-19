@@ -83,19 +83,24 @@ absval.iwres.vs.idv(object,
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
+}
+
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
 
 ## A vanilla plot
-absval.iwres.vs.pred(xpdb5)
+absval.iwres.vs.pred(xpdb)
 
 ## A conditioning plot
-absval.iwres.vs.pred(xpdb5, by="HCTZ")
+absval.iwres.vs.pred(xpdb, by="HCTZ")
 
 ## Custom heading and axis labels
-absval.iwres.vs.pred(xpdb5, main="My conditioning plot", ylb="|IWRES|", xlb="PRED")
+absval.iwres.vs.pred(xpdb, main="My conditioning plot", ylb="|IWRES|", xlb="PRED")
 
 ## Custom colours and symbols, no IDs
-absval.iwres.vs.pred(xpdb5, cex=0.6, pch=3, col=1, ids=FALSE)
-}
+absval.iwres.vs.pred(xpdb, cex=0.6, pch=3, col=1, ids=FALSE)
+
 
 }
 \keyword{methods}

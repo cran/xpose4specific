@@ -24,21 +24,29 @@
 
 \name{ind.plots.wres.hist}
 \alias{ind.plots.wres.hist}
-\title{Histograms of the weighted residuals (WRES) for each individual
+\alias{ind.plots.cwres.hist}
+\title{Histograms of weighted residuals for each individual
   in an Xpose data object, for Xpose 4}
 \description{
   This is a compound plot consisting of histograms of the distribution of
-  weighted residuals (WRES) for every individual in the dataset, a specific 
-  function in Xpose 4. It is a wrapper encapsulating arguments to the 
-  \code{xpose.plot.histogram} function. 
+  weighted residuals (any weighted residual available from NONMEM) for
+  every individual in the dataset. 
+  It is a wrapper encapsulating arguments to the 
+  \code{\link[xpose4generic]{xpose.plot.histogram}} function. 
 }
 \usage{
 ind.plots.wres.hist(object,
            main = "Default",
+           wres="wres",
            ylb = NULL,
            layout=c(4,4),
            inclZeroWRES=FALSE,
            subset=xsubset(object),
+           scales=list(cex=0.7,tck=0.5),
+           aspect="fill",
+           force.by.factor=TRUE,
+           ids=F,
+           as.table=TRUE,
            hicol = object@Prefs@Graph.prefs$hicol,
            hilty = object@Prefs@Graph.prefs$hilty,
            hilwd = object@Prefs@Graph.prefs$hilwd,
@@ -47,25 +55,35 @@ ind.plots.wres.hist(object,
            hidlwd = object@Prefs@Graph.prefs$hidlwd,
            hiborder = object@Prefs@Graph.prefs$hiborder,
            prompt = FALSE,
-           mirror = NULL, main.cex = 0.9,
+           mirror=NULL,
+           main.cex=0.9,
            max.plots.per.page=1,
            ...)
+
+ind.plots.cwres.hist(object,
+           wres="cwres",
+           ...)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{object}{An xpose.data object. }
-  \item{inclZeroWRES}{Logical value indicating whether rows with WRES=0
-    is included in the plot. The default is FALSE. }
   \item{main}{The title of the plot.  If \code{"Default"} then a default
     title is plotted. Otherwise the value should be a string like
     \code{"my title"} or \code{NULL} for no plot title.  For
     \code{"Default"} the function
     \code{\link[xpose4generic]{xpose.multiple.plot.title}} is used.}
+  \item{wres}{Which weighted residual should we plot? Defaults to the WRES.}
   \item{ylb}{A string giving the label for the y-axis. \code{NULL} if none.}
   \item{layout}{A list giving the layout of the graphs on the plot, in
     columns and rows. The default is 4x4.}
+  \item{inclZeroWRES}{Logical value indicating whether rows with WRES=0
+    is included in the plot. The default is FALSE. }
   \item{subset}{A string giving the subset expression to be applied to
     the data before plotting. See \code{\link[xpose4data]{xsubset}}.}
+  \item{scales}{see \code{\link[xpose4generic]{xpose.plot.histogram}}}
+  \item{aspect}{see \code{\link[xpose4generic]{xpose.plot.histogram}}}
+  \item{force.by.factor}{see \code{\link[xpose4generic]{xpose.plot.histogram}}}
+  \item{ids}{see \code{\link[xpose4generic]{xpose.plot.histogram}}}
+  \item{as.table}{see \code{\link[xpose4generic]{xpose.plot.histogram}}}
   \item{hiborder}{the border colour of the histogram - an integer or string. 
     The default is black (see \code{\link[lattice]{histogram}}).}
   \item{hicol}{the fill colour of the histogram - an integer or string. 
@@ -89,14 +107,15 @@ ind.plots.wres.hist(object,
   \item{\dots}{Other arguments passed to \code{\link[xpose4generic]{xpose.plot.histogram}}.}
 }
 \details{
-  Matrices of histograms of the weighted residuals (WRES) in each included 
-  individual are displayed.
+  Matrices of histograms of weighted residuals in each included 
+  individual are displayed. \code{ind.plots.cwres.hist} is just a
+           wrapper for \code{ind.plots.wres.hist(object,wres="cwres").}
 }
 \value{
-  Returns a compound plot comprising histograms of weighted residuals (WRES)
+  Returns a compound plot comprising histograms of weighted residual
   conditioned on individual.
 }
-\author{E. Niclas Jonsson, Mats Karlsson, Andrew Hooker & Justin Wilkins}
+\author{E. Niclas Jonsson, Mats Karlsson, Justin Wilkins & Andrew Hooker}
 \seealso{
   \code{\link[xpose4generic]{xpose.plot.histogram}},
   \code{\link[xpose4generic]{xpose.panel.histogram}},
@@ -106,13 +125,34 @@ ind.plots.wres.hist(object,
 }
 \examples{
 \dontrun{
-
-## A vanilla plot
-ind.plots.wres.hist(xpdb5)
-
-## Different plotting character 
-ind.plots.wres.hist(xpdb5, pch=3)
+## We expect to find the required NONMEM run and table files for run
+## 5 in the current working directory
+xpdb5 <- xpose.data(5)
 }
 
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
+
+## A vanilla plot
+ind.plots.wres.hist(xpdb)
+
+## Different plotting character 
+ind.plots.wres.hist(xpdb, pch=3)
+
+## Different plotting character 
+ind.plots.wres.hist(xpdb, pch=3)
+
+##with a grid
+ind.plots.wres.hist(xpdb, grid=TRUE)
+
+## subsets
+ind.plots.wres.hist(xpdb, subset="ID<10")
+ind.plots.wres.hist(xpdb, subset="ID<10 | ID>45",grid=TRUE)
+
+## plot the CWRES instead
+ind.plots.wres.hist(xpdb, wres="CWRES")
+ind.plots.cwres.hist(xpdb)
+ind.plots.cwres.hist(xpdb, subset="ID<10 | ID>45",grid=TRUE)
 }
 \keyword{methods}

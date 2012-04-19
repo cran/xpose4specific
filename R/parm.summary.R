@@ -134,7 +134,7 @@
       num.tables <- length(table.list)
       plotList <- vector("list",num.tables)
       vp1 <- viewport(x=0, y=1, just=c("left","top"),
-                      w=1, h=0.9,
+                      width=1, height=0.9,
                       gp=gpar(#lineheight=1.0,
                         cex=0.9#txt.cex,
                         ##  font=0.01#txt.font

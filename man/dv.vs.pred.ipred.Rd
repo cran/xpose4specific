@@ -84,13 +84,17 @@ dv.vs.pred.ipred(object,
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
+}
+
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
 
 ## A vanilla plot
-dv.vs.pred.ipred(xpdb5)
+dv.vs.pred.ipred(xpdb)
 
-## Custom colours and symbols, no user IDs
-dv.vs.pred.ipred(xpdb5, cex=0.6, pch=8, col=1, ids=NULL)
-}
+## Custom colours and symbols, IDs
+dv.vs.pred.ipred(xpdb, cex=0.6, pch=8, col=1, ids=TRUE)
 
 }
 \keyword{methods}

@@ -73,8 +73,7 @@ cwres.wres.vs.pred(object,
   A compound xyplot.
 }
 \author{Niclas Jonsson & Andrew Hooker}
-\note{
-}
+
 \seealso{
   \code{\link[xpose4generic]{xpose.plot.default}},
   \code{\link[xpose4generic]{xpose.panel.default}},
@@ -88,8 +87,12 @@ cwres.wres.vs.pred(object,
 ## We expect to find the required NONMEM run, table and data files for run
 ## 5 in the current working directory 
 xpdb5 <- xpose.data(5)
-
-cwres.wres.vs.idv(xpdb5)
 }
+
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
+
+cwres.wres.vs.idv(xpdb)
 }
 \keyword{methods}

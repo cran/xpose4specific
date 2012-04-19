@@ -73,8 +73,7 @@ cov.qq(object,
   Delivers a stack of Q-Q plots.
 }
 \author{Andrew Hooker & Justin Wilkins}
-\note{
-}
+
 \seealso{
 \code{\link[xpose4generic]{xpose.plot.qq}},
 \code{\link[xpose4generic]{xpose.panel.qq}},
@@ -87,16 +86,22 @@ cov.qq(object,
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
+}
 
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
+
+\dontrun{
 ## A stack of parameter histograms, with 3 mirror panes
 parm.qq(xpdb5, mirror=3)
+}
 
 ## A stack of random parameter histograms
-ranpar.qq(xpdb5)
+ranpar.qq(xpdb)
 
 ## Covariate distribution, in green with red line of identity
-cov.qq(xpdb5, col=11, ablcol=2)
-}
+cov.qq(xpdb, col=11, ablcol=2)
 }
 \keyword{methods}% at least one, from doc/KEYWORDS
 

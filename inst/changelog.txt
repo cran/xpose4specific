@@ -1,7 +1,27 @@
 Xpose 4 Changelog
 -----------------
+Latest (xpose 4.3.5)
+  * Updated help files with workable examples, and an example
+    dataset.  Look at data(simpraz.xpdb), simprazExample() and
+    example(xpose.data) for dataset examples and example(basic.gof)
+    and example(cwres.vs.idv) for plot examples. Most of the
+    xpose4specific functions now have examples that can be run with
+    example().
+  * Updated kaplan.plot() so that the kaplan-meier mean covariate
+    (KMMC) plot can be created. Also added more options for adjusting
+    plot properties.
+  * New gofSetup() command to create your own customized series of GOF plots. 
+  * fixed how RSE values were reported on runsum() when the parameter
+    was fixed.
+  * Fixed argument to xpose.VPC.categorical(max.plots.per.page=1), so
+    that only one plot per page was possible. 
+  * Fixed xpose.VPC() so that the psn option for vpc
+    -confidence_interval=X works.  
+  * Fixed compute.cwres() function that wasn't computing anything (and
+    returning an error).
 
-Latest
+
+4.3.2 (4.3.3 xpose4generic)
   * Fixed bug in xpose.VPC when asking for logx=T (didn't work
     previously).
   * Fixed dOFV.vs.id for when there are ties in individual dOFV drops.

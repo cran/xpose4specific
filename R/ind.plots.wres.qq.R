@@ -25,12 +25,18 @@
 "ind.plots.wres.qq" <-
   function(object,
            main = "Default",
+           wres="wres",
                                         #xlb  = NULL,
                                         # ylb  = xlabel(xvardef("dv",object),object),
                                         #ylb = NULL,
            layout=c(4,4),
            inclZeroWRES=FALSE,
            subset=xsubset(object),
+           scales=list(cex=0.7,tck=0.5),
+           aspect="fill",
+           force.by.factor=TRUE,
+           ids=F,
+           as.table=TRUE,
            type="o",
            pch=object@Prefs@Graph.prefs$pch,
            col=object@Prefs@Graph.prefs$col,
@@ -52,13 +58,23 @@
 
     ## Make sure we have the necessary variables defined in the ##
     ## object.                                                  ##
-    if(is.null(check.vars(c("id","wres"),object))) {
-      cat("The ID and WRES variables all need to be defined in the current database!\n")
+    if(is.null(check.vars(c("id",wres),object,silent=F))) {
       return(NULL)
     }
 
+    ## subset the data
+    data <- Data(object,inclZeroWRES,subset=subset)
+
+    ## get plotvar
+    if(is.null(xvardef(wres,object))){
+      plotvar <- wres
+    }else{
+      plotvar <- xvardef(wres,object)
+    }
+
+    
     ## Fix any main and/or axis titles
-    default.plot.title <- "Individual plots of WRES"
+    default.plot.title <- paste("Individual Q-Q plots of", plotvar, sep=" ")
     plotTitle <- xpose.multiple.plot.title(object=object,
                                            plot.text = default.plot.title,
                                            main=main,
@@ -66,8 +82,8 @@
     
     
     ## Bin them
-    length.id <- length(unique(object@Data[[xvardef("id",object)]]))
-    list.id   <- unique(object@Data[[xvardef("id",object)]])
+    list.id   <- unique(data[[xvardef("id",object)]])
+    length.id <- length(list.id)
     plots.per.page <- layout[1] * layout[2]
     plots.cur <- 0
     pages <- 1
@@ -87,57 +103,55 @@
     if (max(page.breaks) < max(list.id)) {
       page.breaks <- c(page.breaks, max(list.id))
     }
-    id.levels <- levels(cut(object@Data$ID, page.breaks, include.lowest=T))
-    old.obj@Data$bin <- cut(object@Data$ID, page.breaks, include.lowest=T)
-    
+    data$bin <- cut(data$ID, page.breaks, include.lowest=T)
+    id.levels <- levels(data$bin)
 
     plot.num <- 0
     plotList <- vector("list",length(id.levels))     
     for (i in id.levels) {    ## start loop
 
-      new.obj@Data <- subset(old.obj@Data, bin == i)
+      #new.obj@Data <- subset(data, bin == i)
+      new.obj@Data <- data[data$bin==i,] #subset(data, bin == i)
 
       
       ## Set up the data ##
       ## Figure out what variables we have defined
-      select <- xvardef("wres",object)
+      ## select <- xvardef("wres",object)
       
-      numpans <- length(select)
+      ## numpans <- length(select)
 
-      nobj <- new("xpose.data",
-                  Runno=object@Runno,
-                  Data = NULL 
-                  )
-      Data(nobj) <- Data(new.obj,inclZeroWRES=inclZeroWRES,
-                         subset=subset)
+      ## nobj <- new("xpose.data",
+      ##             Runno=object@Runno,
+      ##             Data = NULL 
+      ##             )
+      ## Data(nobj) <- Data(new.obj,inclZeroWRES=inclZeroWRES,
+      ##                    subset=subset)
       
       
-      xplot <- xpose.plot.qq(xvardef("wres",nobj),
+      xplot <- xpose.plot.qq(plotvar,
                              new.obj,
-                                        #xlb = xlb,
-                                        #ylb = ylb,
-                             by=xvardef("id",nobj),
+                             ##xlb = xlb,
+                             ##ylb = ylb,
+                             by=xvardef("id",new.obj),
                              main=plotTitle,
-                                        #group="ind",
+                             ##group="ind",
                              layout=layout,
-                             scales=list(cex=0.7,tck=0.5),
-                             aspect="fill",
-                             xvar = xvardef("wres",object),
-                             force.by.factor=TRUE,
-                             ids=F,
+                             scales=scales,
+                             aspect=aspect,
+                             xvar = plotvar,
+                             force.by.factor=force.by.factor,
+                             ids=ids,
                              pch=pch,
                                         #col=col,
                              abllty=abllty,
                              abllwd=abllwd,
                              ablcol=ablcol,
                              subset=subset,
-                             as.table=TRUE,
+                             as.table=as.table,
                              main.cex=main.cex,
                              ...)
       plot.num <- plot.num+1
       plotList[[plot.num]] <- xplot
-      
-
     }
 
     obj <- xpose.multiple.plot(plotList,max.plots.per.page=max.plots.per.page,plotTitle=NULL,prompt=prompt,...)

@@ -81,18 +81,21 @@ absval.cwres.vs.cov.bw(object,
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
 
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
+
 ## A vanilla plot
-absval.cwres.vs.cov.bw(xpdb5)
+absval.cwres.vs.cov.bw(xpdb)
+
 
 ## A custom plot
-absval.cwres.vs.cov.bw(xpdb5, bwdotcol="white", 
+absval.cwres.vs.cov.bw(xpdb, bwdotcol="white", 
   bwdotpch=15,
   bwreccol="red",
   bwrecfill="red",
   bwumbcol="red",
   bwoutpch=5,
   bwoutcol="black")
-}
-
-}
+}}
 \keyword{methods}

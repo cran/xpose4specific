@@ -338,7 +338,8 @@
         }
       }
     }
-    obj <- xpose.multiple.plot(plotList,plotTitle=main,...)
+    obj <- xpose.multiple.plot(plotList,plotTitle=main,
+                               max.plots.per.page=max.plots.per.page,...)
     return(obj)
     ## if(!dont.plot){
     ##   xpose.multiple.plot.default(plotList,plotTitle=main,

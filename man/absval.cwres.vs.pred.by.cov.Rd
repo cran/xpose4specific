@@ -93,17 +93,20 @@ absval.cwres.vs.pred.by.cov(object,
 \dontrun{
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
-xpdb5 <- xpose.data(5)
+xpdb <- xpose.data(5)
+
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
 
 ## A vanilla plot
-absval.cwres.vs.pred.by.cov(xpdb5)
+absval.cwres.vs.pred.by.cov(xpdb)
 
 ## Custom axis labels
-absval.cwres.vs.pred.by.cov(xpdb5, ylb="|CWRES|", xlb="PRED")
+absval.cwres.vs.pred.by.cov(xpdb, ylb="|CWRES|", xlb="PRED")
 
 ## Custom colours and symbols, no IDs
-absval.cwres.vs.pred.by.cov(xpdb5, cex=0.6, pch=3, col=1, ids=FALSE)
+absval.cwres.vs.pred.by.cov(xpdb, cex=0.6, pch=3, col=1, ids=FALSE)
 }
-
 }
 \keyword{methods}

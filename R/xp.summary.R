@@ -36,22 +36,22 @@
       }
 
     cat("\nSUMMARY")
-    print(summary(current.gam))
+    print(summary(eval(parse(text="current.gam"))))
 
     cat("\nPATH TO FINAL MODEL\n")
-    print(current.gam$anova)
+    print(eval(parse(text="current.gam$anova")))
 
     cat("\nCOEFFICIENTS\n")
-    print(coefficients(current.gam))
+    print(coefficients(eval(parse(text="current.gam"))))
 
     cat("\nPRERUN RESULTS\n")
-    cat("Dispersion:",current.gam$dispersion,"\n")
+    cat("Dispersion:",eval(parse(text="current.gam$dispersion")),"\n")
 
     cat("\nDATA\n")
-    cat("Subset expression:",current.gam$subset,"\n")
+    cat("Subset expression:",eval(parse(text="current.gam$subset")),"\n")
     cat("Only first value of covariate considered\n")
-    cat("for each individual:",current.gam$onlyfirst,"\n")
-    cat("Covariates normalized to median:",current.gam$medianNorm,"\n")
+    cat("for each individual:",eval(parse(text="current.gam$onlyfirst")),"\n")
+    cat("Covariates normalized to median:",eval(parse(text="current.gam$medianNorm")),"\n")
 
     return(invisible())
 

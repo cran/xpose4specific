@@ -73,19 +73,23 @@ cwres.vs.pred(object,
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
+}
+
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
 
 ## A vanilla plot
-cwres.vs.pred(xpdb5)
+cwres.vs.pred(xpdb)
 
 ## A conditioning plot
-cwres.vs.pred(xpdb5, by="HCTZ")
+cwres.vs.pred(xpdb, by="HCTZ")
 
 ## Logarithmic Y-axis
-cwres.vs.pred(xpdb5, logy=T)
+cwres.vs.pred(xpdb, logy=TRUE)
 
-## Custom colours and symbols, no IDs
-cwres.vs.pred(xpdb5, cex=0.6, pch=3, col=1, ids=NULL)
-}
+## Custom colours and symbols, IDs
+cwres.vs.pred(xpdb, cex=0.6, pch=3, col=1, ids=TRUE)
 
 }
 \keyword{methods}

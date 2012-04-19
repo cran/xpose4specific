@@ -129,15 +129,13 @@ npc.coverage(npc.info="npc_results.csv",
   }
 }
 
-\details{
-}
+
 \value{
   A list of plots
 }
-\references{}
+
 \author{Andrew Hooker}
-\note{
-}
+
 \seealso{
   \code{\link[xpose4data]{read.npc.vpc.results}}
   \code{\link[xpose4generic]{xpose.multiple.plot.default}}

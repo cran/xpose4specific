@@ -233,7 +233,7 @@
     ret$levs <- ret[["dv"]]
     levels(ret$levs) <- paste(groups,"=",levels(ret$levs))
 
-    xplot <- barchart(formula(formel),groups=levs,
+    xplot <- barchart(formula(formel),groups=ret$levs,
                       data=ret,
                       stack=stack,
                       horizontal=horizontal,#

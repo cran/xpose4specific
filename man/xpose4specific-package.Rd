@@ -111,11 +111,7 @@
   which xpose database to use (i.e. \code{xpdb} after running the
   command \code{xpdb <- xpose.data(run.number)}).
   
-  functions and their help entries may be found in the \\chtml, \\html and
-  \\latex directories of the five Xpose packages, found in the
-  \\\[R-HOME\]\\library folder. Formats are Microsoft compiled HTML,
-  CHTML, PDF and
-  LaTeX, respectively.
+
   
 }
 \author{E. Niclas Jonsson, Mats Karlsson, Justin Wilkins and Andrew Hooker}

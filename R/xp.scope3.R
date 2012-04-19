@@ -48,12 +48,12 @@
   
   ## parnam <- xvardef("parms", object)
   ## covnams <- xvardef("covariates", object)
-  step.list <- as.list(covnams)
-  names(step.list) <- covnams
+  step.list <- as.list(covnam)
+  names(step.list) <- covnam
 
   if(is.null(extra)) extra <- list()	## Set up the smoother lists
 
-  for(cov in covnams) {
+  for(cov in covnam) {
     ## Check that the covariate is not excluded completely
     if(!is.na(match(cov, excl1)) && !is.na(match(cov, excl2)) && !
        is.na(match(cov, excl3)) && !is.na(match(cov, excl4))) 

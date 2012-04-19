@@ -22,23 +22,26 @@
 # along with this program.  A copy can be cound in the R installation
 # directory under \share\licenses. If not, see http://www.gnu.org/licenses/.
 
-"absval.wres.vs.pred.by.cov" <-
+## Added by Justin Wilkins
+## 20/10/2005
+
+"absval.iwres.vs.cov.bw" <-
   function(object,
            
-           ylb  = "|WRES|",
-           type="p",
-           smooth=TRUE,
-           ids = FALSE,
-           idsdir="up",
+           xlb  = "|iWRES|",
+           #ylb  = NULL,
+           #onlyfirst=FALSE,
+           #inclZeroWRES=FALSE,
+           #subset=xsubset(object),
+           #seed  = NULL,
+           #bins  = 10,
+           #samp  = NULL,
+           #prompt = TRUE,
            main="Default",
            ...) {
+    
 
     
-    if(is.null(check.vars(c("pred","wres"),
-                          object,silent=FALSE))) {
-      return()
-    }
-
     if(any(is.null(xvardef("covariates",object)))) {
       return(cat("There are no covariates defined in the database!\n"))
     }
@@ -50,35 +53,28 @@
     }
     plotList <- vector("list",number.of.plots)
     plot.num <- 0 # initialize plot number
-
     
     for (i in xvardef("covariates", object)) {
-
-      xplot <- xpose.plot.default(xvardef("pred",object),
-                                  xvardef("wres",object),
-                                  object,
-                                  main=NULL,
-                                  funy="abs",
-                                  ylb=ylb,
-                                  type=type,
-                                  smooth=smooth,
-                                  by=i,
-                                  ids = ids,
-                                  idsdir=idsdir,
-                                  pass.plot.list = TRUE,
-                                  ...)
-      
+    
+      xplot <- xpose.plot.bw(xvardef("iwres",object),
+                             i,
+                             xlb = xlb,
+                             object,
+                             main = NULL,
+                             ids=FALSE,
+                             binvar = i,
+                             funx="abs",
+                             pass.plot.list = TRUE,
+                             ...)      
 
       plot.num <- plot.num+1
       plotList[[plot.num]] <- xplot
     }
     
-
-    default.plot.title <- paste("|",xlabel(xvardef("wres",object),object),
-                                "| \nvs. ",
-                                xlabel(xvardef("pred",object),object),
-                                sep="")
-
+    default.plot.title <- paste("|",xlabel(xvardef("iwres",object),object),
+                                "| vs ",
+                                "Covariates", sep="")
+    
     plotTitle <- xpose.multiple.plot.title(object=object,
                                            plot.text = default.plot.title,
                                            main=main,
@@ -87,5 +83,4 @@
     return(obj)
 
   }
-
 

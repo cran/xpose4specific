@@ -30,31 +30,29 @@
   precision.
 }
 \usage{
-tabulate.parameters(object, prompt=FALSE, outfile = NULL)
+tabulate.parameters(object, prompt=FALSE, outfile = NULL, dir="")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{object}{An xpose.data object.}
   \item{prompt}{Ask before printing.}
   \item{outfile}{file to output to (NULL means screen).}
+  \item{dir}{Wich directory is the file in. \code{""} means the current
+    directory. }
 }
-\details{
-}
+
 \value{
   A table summarizing the parameters and their precision.
 }
 \author{Niclas Jonsson, Andrew Hooker & Justin Wilkins}
-\note{
-}
-\seealso{
-}
+
+
 \examples{
 \dontrun{ 
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
 
-tabulate.parameters(xpdb5)
-}
-}
+tabulate.parameters(xpdb)
+}}
 \keyword{methods}

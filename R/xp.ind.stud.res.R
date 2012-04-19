@@ -39,15 +39,15 @@
           assign(pos=1, "current.gam", gamobj,immediate=T)
       }
 
-    if(current.gam$family$family == "gaussian"){
-      sd <- sqrt(current.gam$deviance/current.gam$df.residual)
+    if(eval(parse(text="current.gam$family$family")) == "gaussian"){
+      sd <- sqrt(eval(parse(text="current.gam$deviance"))/eval(parse(text="current.gam$df.residual")))
     } else {
       sd <- 1
     }
 
-    dev  <- residuals(current.gam, type = "deviance")/sd
-    pear <- residuals(current.gam, type = "pearson")/sd
-    h    <- lm.influence(current.gam)$hat
+    dev  <- residuals(eval(parse(text="current.gam")), type = "deviance")/sd
+    pear <- residuals(eval(parse(text="current.gam")), type = "pearson")/sd
+    h    <- lm.influence(eval(parse(text="current.gam")))$hat
     rp   <- pear/sqrt(1 - h)
     #for (i in 1:length(rp)){
     #  if(is.na(rp[i])){
@@ -60,11 +60,11 @@
 
     res  <- sgn(dev) * sqrt(dev^2 + h * rp^2)
 
-    pdata <- data.frame(cbind(current.gam$data[,1],res))
+    pdata <- data.frame(cbind(eval(parse(text="current.gam$data[,1]")),res))
     names(pdata) <- c("ID","studres")
     studres.ord <- order(pdata$studres)
     pdata <- pdata[studres.ord,  ]
-    pdata$ID <- reorder.factor(as.factor(pdata$ID),pdata$studres)
+    pdata$ID <- reorder(as.factor(pdata$ID),pdata$studres)
 
     if(is.null(xlb))
       xlb <- "Studentized residual"
@@ -72,8 +72,8 @@
       ylb <- "ID"
 
     if(is.null(title)) {
-      title <- paste("Studentized residual of the GAM fit for ", current.gam$pars," (Run ",
-                     current.gam$runno, ")",sep="")
+      title <- paste("Studentized residual of the GAM fit for ", eval(parse(text="current.gam$pars"))," (Run ",
+                     eval(parse(text="current.gam$runno")), ")",sep="")
     }
 
 #    xplot <- dotchart(pdata$studres,labels=as.character(pdata$ID),

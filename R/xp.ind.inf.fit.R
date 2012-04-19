@@ -42,13 +42,23 @@
       } else {
           assign(pos=1, "current.gam", gamobj,immediate=T)
       }
+      
+      
+      sd <- sqrt(eval(parse(text=paste("current.gam","$deviance",sep="")))/eval(parse(text=paste("current.gam","$df.residual",sep=""))))
 
-    sd   <- sqrt(current.gam$deviance/current.gam$df.residual)
-    pear <- residuals(current.gam,type="pearson")/sd
-    h    <- lm.influence(current.gam)$hat
-    p    <- current.gam$rank
-    rp   <- pear/sqrt(1-h)
-    #for (i in 1:length(rp)){
+      #sd   <- sqrt(current.gam$deviance/current.gam$df.residual)
+      
+
+      #pear <- residuals(current.gam,type="pearson")/sd
+      #h    <- lm.influence(current.gam)$hat
+      #p    <- current.gam$rank
+
+      pear <- residuals(eval(parse(text="current.gam")),type="pearson")/sd
+      h    <- lm.influence(eval(parse(text="current.gam")))$hat
+      p    <- eval(parse(text=paste("current.gam","$rank",sep="")))
+
+      rp   <- pear/sqrt(1-h)
+                                        #for (i in 1:length(rp)){
     #  if(is.na(rp[i])){
     #    rp[i] <- pear[i]
     #  }
@@ -61,7 +71,9 @@
     #  }
     #}
 
-    n    <- p + current.gam$df.residual
+      
+      #n    <- p + current.gam$df.residual
+      n    <- p + eval(parse(text=paste("current.gam","$df.residual",sep="")))
     cooky <- 8/(n-2*p)
     ##    hy   <- (2*p)/(n-2*p)
     hy   <- (2*p)/n
@@ -77,18 +89,24 @@
       xlb <- "Leverage (h/(1-h))"
     if(is.null(ylb))
       ylb <- "Cooks distance"
+      
+      
 
-    if(is.null(title)) {
+
+      if(is.null(title)) {
       title <- paste("Individual influence on the GAM fit for ",
-                     current.gam$pars," (run ",
-                     current.gam$runno, ")",sep="")
+                     eval(parse(text=paste("current.gam","$pars",sep=""))),
+                     " (run ",
+                     #current.gam$runno,
+                     eval(parse(text="current.gam$runno")),
+                     ")",sep="")
     }
 
     ## Get the idlabs
-    if(any(is.null(current.gam$data$ID))){
+    if(any(is.null(eval(parse(text="current.gam$data$ID"))))){
       ids <- "n"
     } else {
-      ids <- current.gam$data$ID
+      ids <- eval(parse(text="current.gam$data$ID"))
     }
 
     ## inform about NaN and INF values
@@ -110,7 +128,7 @@
                     cooky=cooky,
                     hy=hy,
                     scales = list(cex=0.7,tck=-0.01),
-                    ids = current.gam$data[,1],
+                    ids = eval(parse(text="current.gam$data[,1]")),
                     panel=
                     function(x,y,ids,...) {
                       if(!any(ids == "n")&& plot.ids==TRUE) {

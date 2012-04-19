@@ -36,6 +36,7 @@
            type="p",
            smooth=TRUE,
            ids=F,
+           main = "Default",
            ...) {
 
     if(is.null(check.vars(c("wres"),
@@ -48,6 +49,7 @@
                                 sep="")
     plotTitle <- xpose.multiple.plot.title(object=object,
                                            plot.text = default.plot.title,
+                                           main=main,
                                            ...)
 
     xplot <- xpose.plot.default(xvardef("wres",object),

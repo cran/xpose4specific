@@ -21,10 +21,12 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this program.  A copy can be cound in the R installation
 # directory under \share\licenses. If not, see http://www.gnu.org/licenses/.
+xpPage <- function(x) {
+  ## Specify plot annotation. Is added to lattice graphs by providing
+  ## the argument page=xpPage .
 
-"basic.gof.cwres" <-
-  function(object,
-           ...) {
-    basic.gof(object,use.cwres=TRUE,...)
-      }
+    mylab <- paste("Device:",names(dev.cur()),
+                   " Top function:",sys.calls()[[1]],getwd(),Sys.Date(),sep=" ")
+    panel.text(x=0.5,y=0.02,lab=mylab,just="left",cex=0.5,col="darkgray")
+  }
 

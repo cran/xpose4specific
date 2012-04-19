@@ -35,6 +35,7 @@ autocorr.cwres(object,
            type="p",
            smooth=TRUE,
            ids=F,
+           main = "Default",
            ...)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -51,6 +52,11 @@ autocorr.cwres(object,
   \item{ids}{A logical value indicating whether text labels should be
     used as plotting symbols (the variable used for these symbols
     indicated by the \code{idlab} xpose data variable).}
+  \item{main}{The title of the plot.  If \code{"Default"} then a default
+    title is plotted. Otherwise the value should be a string like
+    \code{"my title"} or \code{NULL} for no plot title.  For
+    \code{"Default"} the function
+    \code{\link[xpose4generic]{xpose.multiple.plot.title}} is used.}
   \item{\dots}{Other arguments passed to \code{link[xpose4generic]{xpose.plot.default}}.}
 }
 \details{
@@ -76,19 +82,23 @@ autocorr.cwres(object,
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
+}
+
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
 
 ## A vanilla plot
-autocorr.cwres(xpdb5)
+autocorr.cwres(xpdb)
 
 ## A conditioning plot
-autocorr.cwres(xpdb5, dilution=T)
+autocorr.cwres(xpdb, dilution=TRUE)
 
 ## Custom heading and axis labels
-autocorr.cwres(xpdb5, main="My conditioning plot", ylb="|CWRES|", xlb="PRED")
+autocorr.cwres(xpdb, main="My conditioning plot", ylb="|CWRES|", xlb="PRED")
 
-## Custom colours and symbols, no IDs
-autocorr.cwres(xpdb5, cex=0.6, pch=3, col=1, ids=FALSE)
-}
+## Custom colours and symbols, IDs
+autocorr.cwres(xpdb, cex=0.6, pch=3, col=1, ids=TRUE)
 
 }
 \keyword{methods}

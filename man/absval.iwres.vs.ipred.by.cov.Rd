@@ -84,14 +84,17 @@ absval.iwres.vs.ipred.by.cov(object,
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
 
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
+
 ## A vanilla plot
-absval.iwres.vs.ipred.by.cov(xpdb5)
+absval.iwres.vs.ipred.by.cov(xpdb)
 
 ## Custom axis labels
-absval.iwres.vs.ipred.by.cov(xpdb5, ylb="|IWRES|", xlb="IPRED")
+absval.iwres.vs.ipred.by.cov(xpdb, ylb="|IWRES|", xlb="IPRED")
 
 ## Custom colours and symbols, no IDs
-absval.iwres.vs.ipred.by.cov(xpdb5, cex=0.6, pch=3, col=1, ids=FALSE)
-}
-}
+absval.iwres.vs.ipred.by.cov(xpdb, cex=0.6, pch=3, col=1, ids=FALSE)
+}}
 \keyword{methods}

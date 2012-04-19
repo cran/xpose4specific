@@ -25,12 +25,18 @@
 "ind.plots.wres.hist" <-
   function(object,
            main = "Default",
+           wres="wres",
            #xlb  = NULL,
                                         # ylb  = xlabel(xvardef("dv",object),object),
            ylb = NULL,
            layout=c(4,4),
            inclZeroWRES=FALSE,
            subset=xsubset(object),
+           scales=list(cex=0.7,tck=0.5),
+           aspect="fill",
+           force.by.factor=TRUE,
+           ids=F,
+           as.table=TRUE,
            hicol = object@Prefs@Graph.prefs$hicol,
            hilty = object@Prefs@Graph.prefs$hilty,
            hilwd = object@Prefs@Graph.prefs$hilwd,
@@ -51,7 +57,7 @@
 
     ## Make sure we have the necessary variables defined in the ##
     ## object.                                                  ##
-    if(is.null(check.vars(c("id","wres"),object))) {
+    if(is.null(check.vars(c("id",wres),object))) {
       return(NULL)
     }
     
@@ -62,10 +68,11 @@
       return()
     }
 
+    data <- Data(object,inclZeroWRES,subset=subset)
     
     ## Bin them
-    length.id <- length(unique(object@Data[[xvardef("id",object)]]))
-    list.id   <- unique(object@Data[[xvardef("id",object)]])
+    list.id   <- unique(data[[xvardef("id",object)]])
+    length.id <- length(list.id)
     plots.per.page <- layout[1] * layout[2]
     plots.cur <- 0
     pages <- 1
@@ -85,30 +92,32 @@
     if (max(page.breaks) < max(list.id)) {
       page.breaks <- c(page.breaks, max(list.id))
     }
-    id.levels <- levels(cut(object@Data$ID, page.breaks, include.lowest=T))
-    old.obj@Data$bin <- cut(object@Data$ID, page.breaks, include.lowest=T)
+    data$bin <- cut(data$ID, page.breaks, include.lowest=T)
+    id.levels <- levels(data$bin)
+    
 
     plot.num <- 0
     plotList <- vector("list",length(id.levels))     
     for (i in id.levels) {    ## start loop
       
-      new.obj@Data <- subset(old.obj@Data, bin == i)
+      new.obj@Data <- data[data$bin==i,] #subset(data, bin == i)
 
       ## Set up the data ##
-      ## Figure out what variables we have defined
-      select <- xvardef("wres",object)
-      
-      numpans <- length(select)
+      ## nobj <- new("xpose.data",
+      ##             Runno=object@Runno,
+      ##             Data = NULL 
+      ##             )
+      ## Data(nobj) <- Data(new.obj,inclZeroWRES=inclZeroWRES,
+      ##                    subset=subset)
 
-      nobj <- new("xpose.data",
-                  Runno=object@Runno,
-                  Data = NULL 
-                  )
-      Data(nobj) <- Data(new.obj,inclZeroWRES=inclZeroWRES,
-                         subset=subset)
-      
+      if(is.null(xvardef(wres,object))){
+        plotvar <- wres
+      }else{
+        plotvar <- xvardef(wres,object)
+      }
+
       ## Fix any main and/or axis titles
-      default.plot.title <- "Individual plots of WRES"
+      default.plot.title <- paste("Individual plots of", plotvar, sep=" ")
       plotTitle <- xpose.multiple.plot.title(object=object,
                                              plot.text = default.plot.title,
                                              main=main,
@@ -123,21 +132,21 @@
 ##       }
       
       
-      xplot <- xpose.plot.histogram(xvardef("wres",nobj),
+      xplot <- xpose.plot.histogram(plotvar,#xvardef("wres",nobj),
                                     new.obj,
                                     #xlb = xlb,
                                     #ylb = ylb,
-                                    by=xvardef("id",nobj),
+                                    by=xvardef("id",new.obj),
                                     main=plotTitle,
                                         #group="ind",
                                     layout=layout,
-                                    scales=list(cex=0.7,tck=0.5),
-                                    aspect="fill",
-                                    xvar = xvardef("wres",object),
-                                    force.by.factor=TRUE,
-                                    ids=F,
+                                    scales=scales,
+                                    aspect=aspect,
+                                    xvar = plotvar,#xvardef("wres",object),
+                                    force.by.factor=force.by.factor,
+                                    ids=ids,
                                     subset=subset,
-                                    as.table=TRUE,
+                                    as.table=as.table,
                                     hicol = hicol,
                                     hilty = hilty,
                                     hilwd = hilwd,

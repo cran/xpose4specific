@@ -114,10 +114,8 @@ xp.get.disp(gamdata,
 \value{
   Returned is a \code{\link[gam]{step.gam}} object
 }
-\references{}
 \author{E. Niclas Jonsson, Mats Karlsson, Andrew Hooker & Justin Wilkins}
-\note{
-}
+
 \seealso{
 \code{\link{xp.gam}},
 \code{\link[gam]{step.gam}}
@@ -126,9 +124,13 @@ xp.get.disp(gamdata,
 \dontrun{
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
-xpdb5 <- xpose.data(5)
+xpdb <- xpose.data(5)
 
-xpose.gam(xpdb5, parnam="CL", covnams = xvardef("covariates", xpdb5))
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
+
+xpose.gam(xpdb, parnam="CL", covnams = xvardef("covariates", xpdb))
 }}
 \keyword{methods}% at least one, from doc/KEYWORDS
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

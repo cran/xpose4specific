@@ -24,18 +24,24 @@
 
 \name{absval.wres.vs.cov.bw}
 \alias{absval.wres.vs.cov.bw}
-\title{Absolute  weighted residuals vs covariates for
+\alias{absval.iwres.vs.cov.bw}
+\title{Absolute weighted residuals vs covariates for
   Xpose 4}
 \description{
   This creates a stack of box and whisker plot of absolute population  weighted 
-  residuals (|WRES|) vs covariates, and is a specific function in Xpose 4. 
+  residuals (|WRES| or |iWRES|) vs covariates.
   It is a wrapper encapsulating arguments to the \code{xpose.plot.bw} 
-  function. Most of the options take their default values from xpose.data 
+  function. Most of the options take their default values from the xpose.data 
   object but may be overridden by supplying them as arguments.
 }
 \usage{
 absval.wres.vs.cov.bw(object,
            xlb  = "|WRES|",
+           main="Default",
+           ...)
+
+absval.iwres.vs.cov.bw(object,
+           xlb  = "|iWRES|",
            main="Default",
            ...)
 }
@@ -75,18 +81,24 @@ absval.wres.vs.cov.bw(object,
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
 
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
+
 ## A vanilla plot
-absval.wres.vs.cov.bw(xpdb5)
+absval.wres.vs.cov.bw(xpdb)
 
 ## A custom plot
-absval.wres.vs.cov.bw(xpdb5, bwdotcol="white", 
+absval.wres.vs.cov.bw(xpdb, bwdotcol="white", 
   bwdotpch=15,
   bwreccol="red",
   bwrecfill="red",
   bwumbcol="red",
   bwoutpch=5,
   bwoutcol="black")
-}
 
+## A vanilla plot using IWRES
+absval.iwres.vs.cov.bw(xpdb)
+}
 }
 \keyword{methods}

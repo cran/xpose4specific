@@ -156,7 +156,7 @@
     ## Check to see if the dispersion should be estimated
     ##
     if(!is.null(disp)) {
-      disp1 <- xp.get.disp(gamdata=gamdata,parnam=parnam,covnams=covnams,fam=family)
+      disp1 <- xp.get.disp(gamdata=gamdata,parnam=parnam,covnams=covnams,family=family)
       disp2 <- disp1$dispersion
     }
 

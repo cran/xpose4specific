@@ -1,13 +1,13 @@
 Package: xpose4specific
 Title: Xpose 4 Specific Functions Package
-Version: 4.3.2
-Date: 2010-11-30
+Version: 4.3.5
+Date: 2012-04-19
 Author: E. Niclas Jonsson <niclas.jonsson@farmbio.uu.se>, Andrew Hooker
         <andrew.hooker@farmbio.uu.se> and Mats Karlsson
         <mats.karlsson@farmbio.uu.se>
 Maintainer: Andrew Hooker <andrew.hooker@farmbio.uu.se>
-Depends: R (>= 2.2.0), lattice, grid, Hmisc, gam, methods, xpose4data
-        (>= 4.3.2), xpose4generic (>= 4.3.2)
+Depends: R (>= 2.2.0), lattice, grid, survival, Hmisc, gam, methods,
+        xpose4data (>= 4.3.5), xpose4generic (>= 4.3.5)
 Description: Xpose is collection of packages to be used as a model
         building aid for non-linear mixed effects (population) analysis
         using NONMEM. It facilitates data set checkout, exploration and
@@ -22,8 +22,8 @@ License: LGPL (>= 3)
 URL: http://xpose.sourceforge.net
 Copyright: 1998-2004 E. Niclas Jonsson and Mats Karlsson. 2005-2008
         Andrew C. Hooker, Justin J. Wilkins, Mats O. Karlsson and E.
-        Niclas Jonsson. 2009-2010 Andrew C. Hooker, Mats O. Karlsson
+        Niclas Jonsson. 2009-2012 Andrew C. Hooker, Mats O. Karlsson
         and E. Niclas Jonsson.
-Packaged: 2010-11-30 18:06:34 UTC; Andrew Hooker
+Packaged: 2012-04-19 12:09:05 UTC; Andy
 Repository: CRAN
-Date/Publication: 2010-11-30 19:46:57
+Date/Publication: 2012-04-19 15:43:29

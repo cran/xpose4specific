@@ -37,6 +37,7 @@
 absval.iwres.vs.ipred(object,
            ylb  = "|iWRES|",
            type="p",
+           ids = FALSE,
            idsdir = "up",
            smooth = TRUE,
            ...)
@@ -49,6 +50,7 @@ absval.iwres.vs.ipred(object,
     since we are displaying absolute values. }
   \item{type}{Type of plot. The default is points only ("p"), but lines ("l")
     and both ("b") are also available.}
+  \item{ids}{Should id values be displayed?}
   \item{smooth}{Logical value indicating whether an x-y smooth should be superimposed.
     The default is TRUE.}
   \item{\dots}{Other arguments passed to
@@ -75,18 +77,23 @@ absval.iwres.vs.ipred(object,
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
+}
+
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
 
 ## A vanilla plot
-absval.iwres.vs.ipred(xpdb5)
+absval.iwres.vs.ipred(xpdb)
 
 ## A conditioning plot
-absval.iwres.vs.ipred(xpdb5, by="HCTZ")
+absval.iwres.vs.ipred(xpdb, by="HCTZ")
 
 ## Custom heading and axis labels
-absval.iwres.vs.ipred(xpdb5, main="My conditioning plot", ylb="|IWRES|", xlb="IPRED")
+absval.iwres.vs.ipred(xpdb, main="My conditioning plot", ylb="|IWRES|", xlb="IPRED")
 
 ## Custom colours and symbols, no IDs
-absval.iwres.vs.ipred(xpdb5, cex=0.6, pch=3, col=1, ids=FALSE)
-}
+absval.iwres.vs.ipred(xpdb, cex=0.6, pch=3, col=1, ids=FALSE)
+
 }
 \keyword{methods}

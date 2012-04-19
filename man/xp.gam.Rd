@@ -166,10 +166,10 @@ xp.summary(gamobj=NULL)
 \dontrun{
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
-xpdb5 <- xpose.data(5)
+xpdb <- xpose.data(5)
 
 ## Run a GAM
-xp.gam(xpdb5)
+xp.gam(xpdb)
 
 ## Summarize GAM
 xp.summary()
@@ -181,10 +181,9 @@ xp.akaike.plot()
 xp.ind.stud.res()
 
 ## Individual influence on GAM fit
-xp.ind.inf.fit(plot.ids=xpdb5@Prefs@Gam.prefs$plot.ids)
+xp.ind.inf.fit(plot.ids=xpdb@Prefs@Gam.prefs$plot.ids)
 
 ## Individual influence on GAM terms
-xp.ind.inf.terms(plot.ids=xpdb5@Prefs@Gam.prefs$plot.ids)
-}
-}
+xp.ind.inf.terms(plot.ids=xpdb@Prefs@Gam.prefs$plot.ids)
+}}
 \keyword{methods}

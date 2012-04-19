@@ -38,13 +38,15 @@
     } else {
       assign(pos=1, "current.gam", gamobj,immediate=T)
     }
-    if(is.null(current.gam$steppit)) {
+    ##eval(parse(text=paste("current.gam","$steppit",sep="")))
+    ##if(is.null(current.gam$steppit)) {
+    if(is.null(eval(parse(text=paste("current.gam","$steppit",sep=""))))) {
       cat("This plot is not applicable without stepwise covariate selection.\n")
       return()
     }
     
     
-    keep <- current.gam$keep
+    keep <- eval(parse(text=paste("current.gam","$keep",sep=""))) #current.gam$keep
     aic <- apply(keep, 2, function(x)
                  return(x$AIC))
     df.resid <- apply(keep, 2, function(x)
@@ -66,12 +68,17 @@
       pdata2 <- pdata
     }
     pdata1$term <- unclass(pdata1$term)
-    pdata1$term <- reorder.factor(as.factor(pdata1$term), pdata1$aic)
+    pdata1$term <- reorder(as.factor(pdata1$term), pdata1$aic)
     names(pdata1$term) <- pdata2$term
     
     if(is.null(title)) {
-      title <- paste("AIC values from stepwise GAM search on ",current.gam$pars," (Run ",
-                     current.gam$runno, ")",sep="")
+      title <- paste("AIC values from stepwise GAM search on ",
+                     eval(parse(text=paste("current.gam","$pars",sep=""))),
+                     #current.gam$pars,
+                     " (Run ",
+                     eval(parse(text=paste("current.gam","$runno",sep=""))),
+                     #current.gam$runno,
+                     ")",sep="")
     }
         
     xplot <- dotplot(term~aic,

@@ -77,13 +77,17 @@ absval.iwres.cwres.vs.ipred.pred(object,
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
+}
+
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
 
 ## A vanilla plot
-absval.iwres.wres.vs.ipred.pred(xpdb5)
-absval.iwres.cwres.vs.ipred.pred(xpdb5)
+absval.iwres.wres.vs.ipred.pred(xpdb)
+absval.iwres.cwres.vs.ipred.pred(xpdb)
 
 ## Custom colours and symbols
-absval.iwres.cwres.vs.ipred.pred(xpdb5, cex=0.6, pch=8, col=1)
-}
+absval.iwres.cwres.vs.ipred.pred(xpdb, cex=0.6, pch=8, col=1)
 }
 \keyword{methods}

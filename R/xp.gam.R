@@ -150,7 +150,7 @@
     ##
     if(exists(paste("gam.xpose.", pars, ".",
                     object@Runno, sep = ""),
-              w = 1)
+              where = 1)
        & !overwrite) {
       if(ask.for.input){
         cat("\nThere is already a gam object associated with the current\n")
@@ -183,7 +183,7 @@
     assign(pos = 1, paste("gam.xpose.", pars, ".", object@Runno,
              sep= ""), gamobj1, immediate = T)
     
-    if(exists("current.gam",wh=1)){
+    if(exists("current.gam",where=1)){
       remove(pos=1,"current.gam")
     }
     assign(pos = 1, "current.gam", gamobj1,immediate=T)

@@ -42,7 +42,7 @@
       assign(pos=1, "current.gam", gamobj,immediate=T)
     }
 
-    if(length(names(coefficients(current.gam)))==0){
+    if(length(names(coefficients(eval(parse(text="current.gam")))))==0){
         cat("\nNo covariates found for this parameter\n")
         return()
     }
@@ -54,7 +54,7 @@
 
     ##assign(fr=0,"form",current.gam$Start.mod)
     ##cook <- data.frame(xp.cook(current.gam))
-    cook <- data.frame(dfbetas(current.gam)^2)
+    cook <- data.frame(dfbetas(eval(parse(text="current.gam")))^2)
     cook <- cook[,-1]
     xvals <- seq(length = length(cook[, 1]))
 
@@ -72,10 +72,10 @@
 
 
     ## Get the idlabs
-    if(any(is.null(current.gam$data$ID))){
+    if(any(is.null(eval(parse(text="current.gam$data$ID"))))){
       ids <- "n"
     } else {
-      ids <- current.gam$data$ID
+      ids <- eval(parse(text="current.gam$data$ID"))
     }
 
     ## create enpty list for plots
@@ -127,9 +127,9 @@
 
     plotTitle <- paste("Inidividual influence (Cooks distance) on each GAM term\n",
                        "for ",
-                       current.gam$pars,
+                       eval(parse(text="current.gam$pars")),
                        " (Run ",
-                       current.gam$runno, ")",
+                       eval(parse(text="current.gam$runno")), ")",
                        sep="")
     obj <- xpose.multiple.plot(plotList,plotTitle,prompt,...)
     return(obj)

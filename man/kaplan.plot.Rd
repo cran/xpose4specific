@@ -1,14 +1,37 @@
+% Xpose 4
+% An R-based population pharmacokinetic/
+% pharmacodynamic model building aid for NONMEM.
+% Copyright (C) 1998-2004 E. Niclas Jonsson and Mats Karlsson.
+% Copyright (C) 2005-2008 Andrew C. Hooker, Justin J. Wilkins, 
+% Mats O. Karlsson and E. Niclas Jonsson.
+% Copyright (C) 2009-2010 Andrew C. Hooker, Mats O. Karlsson and 
+% E. Niclas Jonsson.
+
+% This file is a part of Xpose 4.
+% Xpose 4 is free software; you can redistribute it and/or
+% modify it under the terms of the GNU Lesser General Public License
+% as published by the Free Software Foundation, either version 3
+% of the License, or (at your option) any later version.
+
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU Lesser General Public License for more details.
+
+% You should have received a copy of the GNU Lesser General Public License
+% along with this program.  A copy can be cound in the R installation
+% directory under \share\licenses. If not, see http://www.gnu.org/licenses/.
 \name{kaplan.plot}
 \alias{kaplan.plot}
 \title{
-Kaplan-Meyer plots of (repeated) time-to-event data
+Kaplan-Meier plots of (repeated) time-to-event data
 }
 \description{
-Kaplan-Meyer plots of (repeated) time-to-event data.  Includes VPCs.
+Kaplan-Meier plots of (repeated) time-to-event data.  Includes VPCs.
 }
 \usage{
 kaplan.plot(x="TIME",y="DV",id="ID",
-           data=d,
+           data=NULL,
            evid="EVID",
            by=NULL,
            xlab="Time",
@@ -24,15 +47,24 @@ kaplan.plot(x="TIME",y="DV",id="ID",
            add.baseline=T,
            add.last.area=T,
            subset=NULL,
+           ##subset.real=NULL,
            main="Default",
+           main.sub="Default",
+           main.sub.cex = 0.8,
            nbins=NULL,
+           real.type="l",
+           real.lty=1,
+           real.lwd=1,
+           real.col="blue",
            real.se= if(!is.null(sim.data)) F else T,
            real.se.type="l",
-           real.type="l",
-           real.lwd=1,
            real.se.lty=2,
            real.se.lwd=0.5,
            real.se.col="red",
+           cens.type="l",
+           cens.lty=1,
+           cens.col="black",
+           cens.lwd=1,
            inclZeroWRES=TRUE,
            onlyfirst=FALSE,
            samp=NULL,
@@ -42,8 +74,9 @@ kaplan.plot(x="TIME",y="DV",id="ID",
            poly.lty=2,
            censor.lines=TRUE,
            ylim=c(-5,105),
+           cov = NULL,
+           cov.fun = "mean",
            ...)
-
 }
 \arguments{
   \item{x}{
@@ -119,17 +152,24 @@ Should an area be added to the VPC extending the last PI?
 The subset of the data and sim.data to use.
 }
   \item{main}{
-The title of the plot.
+The title of the plot. Can also be \code{NULL} or \code{"Default"}.
 }
-  \item{nbins}{
+  \item{main.sub}{
+The title of the subplots. Must be a list, the same length as the number
+  of subplots (actual graphs), or \code{NULL} or \code{"Default"}.
+}
+\item{main.sub.cex}{
+  The size of the title of the subplots.
+}
+\item{nbins}{
 The number of bins to use in the VPC.  If \code{NULL}, the the number of
   unique \code{x} values in \code{sim.data} is used.
 }
-  \item{real.se}{
+\item{real.se}{
 Should the standard errors of the real (non simulated) data be plotted?
   Calculated using \code{\link[survival]{survfit}}.
 }
-  \item{real.se.type}{
+\item{real.se.type}{
 Type for the standard errors.
 }
   \item{real.type}{
@@ -137,6 +177,12 @@ Type for the real data.
 }
   \item{real.lwd}{
 Line width (lwd) for the real data.
+}
+\item{real.lty}{
+Line type (lty) for the curve of the original (or real) data.
+}
+\item{real.col}{
+  Color for the curve of the original (or real) data.
 }
   \item{real.se.lty}{
 Line type (lty) for the standard error lines.
@@ -146,6 +192,24 @@ Line width (lwd) for the standard error lines.
 }
   \item{real.se.col}{
 Color for the standard error lines.
+}
+  \item{cens.type}{
+Type for the censored lines.
+}
+  \item{cens.lty}{
+Line type (lty) for the censored lines.
+}
+  \item{cens.col}{
+Color for the censored lines.
+}
+  \item{cens.lwd}{
+Line width for the censored lines.
+}
+\item{cov}{
+  The covariate in the dataset to plot instead of the survival curve.
+}
+\item{cov.fun}{
+  The summary function for the covariate in the dataset to plot instead of the survival curve.
 }
   \item{inclZeroWRES}{
 Include WRES=0 rows from the real data set in the plots?
@@ -179,17 +243,13 @@ Limits for the y-axes
 Additional arguments passed to the function. 
 }
 }
-\details{
-}
+
 \value{
   returns an object of class "xpose.multiple.plot".
 }
-\references{
-}
+
 \author{
 Andrew C. Hooker
-}
-\note{
 }
 
 \seealso{

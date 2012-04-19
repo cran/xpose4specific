@@ -73,21 +73,24 @@ absval.wres.vs.pred(object,
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
-
-## A vanilla plot
-absval.wres.vs.pred(xpdb5)
-
-## A conditioning plot
-absval.wres.vs.pred(xpdb5, by="HCTZ")
-
-## Custom heading and axis labels
-absval.wres.vs.pred(xpdb5, main="My conditioning plot", 
-  ylb="|WRES|", xlb="PRED")
-
-## Custom colours and symbols, no IDs
-absval.wres.vs.pred(xpdb5, cex=0.6, pch=19, col=1, ids=FALSE, 
-  smcol="blue", smlty=2)
 }
 
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
+
+## A vanilla plot
+absval.wres.vs.pred(xpdb)
+
+## A conditioning plot
+absval.wres.vs.pred(xpdb, by="HCTZ")
+
+## Custom heading and axis labels
+absval.wres.vs.pred(xpdb, main="My conditioning plot", 
+  ylb="|WRES|", xlb="PRED")
+
+## Custom colours and symbols
+absval.wres.vs.pred(xpdb, cex=0.6, pch=19, col=1, 
+  smcol="blue", smlty=2)
 }
 \keyword{methods}

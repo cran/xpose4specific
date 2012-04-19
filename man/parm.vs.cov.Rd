@@ -81,14 +81,13 @@ parm.vs.cov(object,
 \dontrun{
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
-xpdb5 <- xpose.data(5)
+xpdb <- xpose.data(5)
 
 ## A vanilla plot
-parm.vs.cov(xpdb5)
+parm.vs.cov(xpdb)
 
-## Custom colours and symbols, no IDs
-parm.vs.cov(xpdb5, cex=0.6, pch=3, col=1, ids=NULL)
+## Custom colours and symbols, IDs
+parm.vs.cov(xpdb, cex=0.6, pch=3, col=1, ids=TRUE)
 }
-
 }
 \keyword{methods}

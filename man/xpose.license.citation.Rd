@@ -32,18 +32,10 @@
 \usage{
 xpose.license.citation()
 }
-\arguments{
-}
-\details{
-}
 \value{
   The EULA.
 }
 \author{Andrew Hooker}
-\note{
-}
-\seealso{
-}
 \examples{
 xpose.license.citation()
 }

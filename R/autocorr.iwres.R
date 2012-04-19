@@ -22,31 +22,40 @@
 # along with this program.  A copy can be cound in the R installation
 # directory under \share\licenses. If not, see http://www.gnu.org/licenses/.
 
-"absval.iwres.vs.ipred" <-
+"autocorr.iwres" <-
   function(object,
-           ylb  = "|iWRES|",
+           #ylb  = "|WRES|",
+           #idsdir="up",
            type="p",
-           ids = FALSE,
-           idsdir = "up",
-           smooth = TRUE,
+           smooth=TRUE,
+           ids=F,
+           main = "Default",
            ...) {
-    
-    if(is.null(xvardef("iwres",object)) ||
-       is.null(xvardef("ipred",object))) {
-      cat("The required variables are not set in the data base\n")
+
+    if(is.null(check.vars(c("iwres"),
+                          object,silent=FALSE))) {
       return()
     }
-
-    xplot <- xpose.plot.default(xvardef("ipred",object),
-                                xvardef("iwres",object),
-                                ylb = ylb,
-                                funy = "abs",
-                                type= type,
-                                ids = ids,
-                                idsdir=idsdir,
-                                smooth=smooth,
-                                object,
-                                ...)
     
+
+    default.plot.title <- paste("Autocorrelation of ",xlabel(xvardef("iwres",object),object),
+                                sep="")
+    plotTitle <- xpose.multiple.plot.title(object=object,
+                                           plot.text = default.plot.title,
+                                           main=main,
+                                           ...)
+
+    xplot <- xpose.plot.default(xvardef("iwres",object),
+                                xvardef("iwres",object),
+                                object,
+                                #ylb=ylb,
+                                #idsdir=idsdir,
+                                type=type,
+                                smooth=smooth,
+                                ids=ids,
+                                autocorr=TRUE,
+                                main=plotTitle,
+                                ...)
+
     return(xplot)
   }

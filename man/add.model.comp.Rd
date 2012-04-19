@@ -24,11 +24,10 @@
 
 \name{add.model.comp}
 \alias{add.model.comp}  
-\alias{add.model.comp.cwres}  
 \title{Additional model comparison plots, for Xpose 4}
 \description{
   This creates a stack of four plots, comparing absolute values of PRED, absolute values of IPRED, 
-  delta WRES (or CWRES) and delta IWRES
+  delta CWRES (or WRES) and delta IWRES
   estimates for the two specified model fits. 
 }
 \usage{
@@ -38,14 +37,7 @@ add.model.comp(object,
            inclZeroWRES = FALSE,
            subset = xsubset(object),
            main="Default",
-           ...)
-           
-add.model.comp.cwres(object,
-           object.ref = NULL,
-           onlyfirst = FALSE,
-           inclZeroWRES = FALSE,
-           subset = xsubset(object),
-           main="Default",
+           force.wres=FALSE,
            ...)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -64,6 +56,8 @@ add.model.comp.cwres(object,
     \code{"my title"} or \code{NULL} for no plot title.  For
     \code{"Default"} the function
     \code{\link[xpose4generic]{xpose.multiple.plot.title}} is used.}
+  \item{force.wres}{Should we use the WRES in the plots instead of CWRES
+    (logical \code{TRUE} or \code{FALSE})}
   \item{\dots}{Other arguments passed to \code{link[xpose4generic]{xpose.plot.default}}.}
 }
 \details{
@@ -77,7 +71,7 @@ add.model.comp.cwres(object,
 }
 \value{
   Returns a stack of plots comprising comparisons of absolute values of PRED, 
-  absolute values of IPRED, absolute differences in WRES (or CWRES)
+  absolute values of IPRED, absolute differences in CWRES (or WRES)
   and absolute differences in IWRES for the two specified runs.
 }
 \author{E. Niclas Jonsson, Mats Karlsson, Andrew Hooker & Justin Wilkins}
@@ -100,7 +94,7 @@ xpdb6 <- xpose.data(6)
 add.model.comp(xpdb5, xpdb6, prompt = FALSE)
 
 ## Custom colours and symbols, no user IDs
-add.model.comp.cwres(xpdb5, xpdb6, cex=0.6, pch=8, col=1, ids=NULL)
+add.model.comp(xpdb5, xpdb6, cex=0.6, pch=8, col=1, ids=NULL)
 }
 
 }

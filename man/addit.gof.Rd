@@ -94,13 +94,18 @@ addit.gof(object,
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
+}
+
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
 
 ## A vanilla plot
-addit.gof(xpdb5)
+addit.gof(xpdb)
 
-## Custom colours and symbols, no user IDs
-addit.gof(xpdb5, cex=0.3, pch=0, col=8, ids=NULL)
-}
+## Custom colours and symbols
+addit.gof(xpdb, cex=0.3, pch=0, col=8)
+
 
 }
 \keyword{methods}

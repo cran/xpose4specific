@@ -90,12 +90,15 @@ wres.vs.cov(object,
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
 
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
+
 ## A vanilla plot
-wres.vs.cov(xpdb5)
+wres.vs.cov(xpdb)
 
-## Custom colours and symbols, no IDs
-wres.vs.cov(xpdb5, cex=0.6, pch=3, col=1, ids=NULL)
+## Custom colours and symbols, IDs
+wres.vs.cov(xpdb, cex=0.6, pch=3, col=1, ids=TRUE)
 }
-
 }
 \keyword{methods}

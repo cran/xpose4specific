@@ -73,11 +73,13 @@ Returns a stack of xyplots and histograms of parameters against parameters.
 \dontrun{
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
-xpdb5 <- xpose.data(5)
+xpdb <- xpose.data(5)
 
-parm.vs.parm(xpdb5)
 
-parm.vs.parm(xpdb5,mirror=3)
+parm.vs.parm(xpdb)
+
+
+parm.vs.parm(xpdb,mirror=3)
 }
 }
 

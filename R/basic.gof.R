@@ -72,6 +72,7 @@
                           
     xplot3 <- absval.iwres.vs.ipred(object,
                                  main=NULL,
+                                 #ids=FALSE,
                                  pass.plot.list=TRUE,
                                  logx=loglist['ipred'], logy=loglist['iwres'], 
                                  ...)

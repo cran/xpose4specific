@@ -74,8 +74,7 @@ data.checkout(obj=NULL,
   A stack of dotplots.
 }
 \author{Niclas Jonsson, Andrew Hooker & Justin Wilkins}
-\note{
-}
+
 \seealso{
      \code{\link[lattice]{dotplot}},
      \code{\link[xpose4data]{xpose.prefs-class}},

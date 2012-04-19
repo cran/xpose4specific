@@ -28,11 +28,16 @@
            type = NULL,
            ylb=expression(paste("|", Delta, "IPRED|")),
            main="Default",
+           #ref.default = ".ref.db",
            ...) {
 
     if (is.null(object.ref)) {
       ref.list <- get.refrunno()
-      object.ref <- .ref.db
+      if(exists(".ref.db")){
+        object.ref <- eval(parse(text=".ref.db"))
+      } else {
+        return()
+      }
       if(any(is.null(ref.list)))
         return()
     } 

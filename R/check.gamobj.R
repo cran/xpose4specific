@@ -46,7 +46,7 @@
           return(ans1 <- NULL)
         }
         gobjname <- paste("gam.xpose.", ans, ".", ans1, sep = "")
-        if(!exists(gobjname, w = 1)) {
+        if(!exists(gobjname, where = 1)) {
           cat("\n*There are no object that matches", gobjname, 
               "\n")
           gobjname <- Recall()
@@ -56,9 +56,15 @@
     ##
     ## The real code starts here
     ##
-    if(exists("current.gam", w = 1)) {
-      cat("\nThe current GAM object is for", 
-          current.gam$pars, "in run", current.gam$runno, ".\n")
+    if(exists("current.gam", where = 1)) {
+      
+      cat("\nThe current GAM object is for",
+          eval(parse(text=paste("current.gam","$pars",sep=""))),
+          #current.gam$pars,
+          "in run",
+          #current.gam$runno,
+          eval(parse(text=paste("current.gam","$runno",sep=""))),
+          ".\n")
       cat("\nDo you want to proceed with this gam object? y(n) ")
       ans <- readline()
       if(ans != "y" && ans != "") {

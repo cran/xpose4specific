@@ -22,31 +22,62 @@
 # along with this program.  A copy can be cound in the R installation
 # directory under \share\licenses. If not, see http://www.gnu.org/licenses/.
 
-"absval.iwres.vs.ipred" <-
+"absval.wres.vs.idv" <-
   function(object,
-           ylb  = "|iWRES|",
-           type="p",
-           ids = FALSE,
-           idsdir = "up",
-           smooth = TRUE,
+           idv="idv",
+           wres="Default",
+           ylb  = "Default",
+           smooth       = TRUE,
+           idsdir       = "up",
+           type         = "p",
            ...) {
-    
-    if(is.null(xvardef("iwres",object)) ||
-       is.null(xvardef("ipred",object))) {
-      cat("The required variables are not set in the data base\n")
+
+    if(is.null(check.vars(idv,object,silent=FALSE))) {
       return()
     }
 
-    xplot <- xpose.plot.default(xvardef("ipred",object),
-                                xvardef("iwres",object),
-                                ylb = ylb,
-                                funy = "abs",
-                                type= type,
-                                ids = ids,
+    if(!is.na(match(wres,"Default"))) {
+      if(is.null(check.vars("cwres",object,silent=T))) {
+        if(is.null(check.vars("wres",object,silent=F))){
+          return()
+        }else{
+          wres="wres"
+        }
+      } else {
+        wres = "cwres"
+      }
+    } else {
+      if(is.null(check.vars(wres,object,silent=FALSE))) {
+        return()
+      }
+    }
+    
+    
+    if(is.null(xvardef(idv,object))){
+      xvar <- idv
+    }else{
+      xvar <- xvardef(idv,object)
+    }
+    if(is.null(xvardef(wres,object))){
+      yvar <- wres
+    }else{
+      yvar <- xvardef(wres,object)
+    }
+
+    if(!is.na(match(ylb,"Default"))) {
+      ylb <- paste("|",yvar, "|", sep="")
+    } 
+    
+    xplot <- xpose.plot.default(xvar,
+                                yvar,
+                                object,
+                                ylb=ylb,
+                                funy="abs",
                                 idsdir=idsdir,
                                 smooth=smooth,
-                                object,
+                                type = type,
                                 ...)
     
     return(xplot)
   }
+

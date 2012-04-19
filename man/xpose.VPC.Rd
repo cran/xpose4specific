@@ -294,15 +294,13 @@ xpose.VPC(vpc.info = "vpc_results.csv",
   }
 }
 
-\details{
-}
+
 \value{
   A plot or a list of plots.
 }
-\references{ }
+
 \author{ Andrew Hooker }
-\note{
-}
+
 \seealso{
   \code{\link[xpose4data]{read.vpctab}}
   \code{\link[xpose4data]{read.npc.vpc.results}}

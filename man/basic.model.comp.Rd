@@ -24,7 +24,6 @@
 
 \name{basic.model.comp}
 \alias{basic.model.comp}  
-\alias{basic.model.comp.cwres}  
 \title{Basic model comparison plots, for Xpose 4}
 \description{
   This creates a stack of four plots, comparing PRED, IPRED, WRES (or CWRES), and IWRES
@@ -40,13 +39,6 @@ basic.model.comp(object,
            force.wres=FALSE,
            ...)
            
-basic.model.comp.cwres(object,
-           object.ref = NULL,
-           onlyfirst = FALSE,
-           inclZeroWRES = FALSE,
-           subset = xsubset(object),
-           main="Default",
-           ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

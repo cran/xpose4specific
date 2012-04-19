@@ -30,14 +30,19 @@
                                #prompt = TRUE,
                                main="Default",
                                force.wres=FALSE,
+                               #ref.default = ".ref.db",
                                ...) {
 
-  if (is.null(object.ref)) {
-    ref.list <- get.refrunno()
-    object.ref <- .ref.db
-    if(any(is.null(ref.list)))
-      return()
-  } 
+    if (is.null(object.ref)) {
+      ref.list <- get.refrunno()
+      if(exists(".ref.db")){
+        object.ref <- eval(parse(text=".ref.db"))
+      } else {
+        return()
+      }
+      if(any(is.null(ref.list)))
+        return()
+    } 
   
   if(dim(object@Data)[1] != dim(object.ref@Data)[1]) {
     cat("The current database and the reference database do not have\n")

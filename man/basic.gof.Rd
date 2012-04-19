@@ -24,16 +24,15 @@
 
 \name{basic.gof}
 \alias{basic.gof}  
-\alias{basic.gof.cwres}
 \title{Basic goodness-of-fit plots, for Xpose 4}
 \description{
   This is a compound plot consisting of plots of observations (DV) vs 
   population predictions (PRED), observations (DV) vs individual predictions
   (IPRED), absolute individual weighted residuals (|IWRES|) vs IPRED, and 
-  weighted population residuals (WRES) vs independent variable (IDV), a 
-  specific function in Xpose 4. CWRES are also supported. It is a wrapper 
+  weighted population residuals (CWRES) vs independent variable (IDV), a 
+  specific function in Xpose 4. WRES are also supported. It is a wrapper 
   encapsulating arguments to the \code{dv.vs.pred}, \code{dv.vs.ipred}, 
-  \code{absval.iwres.vs.ipred} and \code{wres.vs.idv} (or \code{cwres.vs.idv}) functions. 
+  \code{absval.iwres.vs.ipred} and \code{wres.vs.idv} functions. 
 }
 \usage{
 basic.gof(object,
@@ -42,8 +41,6 @@ basic.gof(object,
            use.log = FALSE,
            ...)
            
-basic.gof.cwres(object,
-           ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -94,16 +91,19 @@ basic.gof.cwres(object,
 }
 \examples{
 \dontrun{
-## We expect to find the required NONMEM run and table files for run
-## 5 in the current working directory
-xpdb5 <- xpose.data(5)
-
-## A vanilla plot
-basic.gof(xpdb5)
-
-## Custom colours and symbols, no user IDs
-basic.gof.cwres(xpdb5, cex=0.6, pch=8, col=1, ids=NULL)
+## We expect to find the required NONMEM run and table files for run 1
+## in the current working directory
+xpdb <- xpose.data(1)
 }
 
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
+
+## A vanilla plot
+basic.gof(xpdb)
+
+## Custom colours and symbols, IDs of individuals in study
+basic.gof(xpdb, cex=0.6, pch=8, col=1, ids=TRUE)
 }
 \keyword{methods}

@@ -69,19 +69,23 @@ dv.vs.ipred(object,
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
+}
+
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
 
 ## A vanilla plot
-dv.vs.ipred(xpdb5)
+dv.vs.ipred(xpdb)
 
 ## A conditioning plot
-dv.vs.ipred(xpdb5, by="HCTZ")
+dv.vs.ipred(xpdb, by="HCTZ")
 
 ## Logarithmic Y-axis
-dv.vs.ipred(xpdb5, logy=T)
+dv.vs.ipred(xpdb, logy=TRUE)
 
-## Custom colours and symbols, no IDs
-dv.vs.ipred(xpdb5, cex=0.6, pch=3, col=1, ids=NULL)
-}
+## Custom colours and symbols, IDs
+dv.vs.ipred(xpdb, cex=0.6, pch=3, col=1, ids=TRUE)
 
 }
 \keyword{methods}

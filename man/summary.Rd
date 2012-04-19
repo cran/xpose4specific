@@ -79,8 +79,7 @@ parm.summary(object,
   \item{max.plots.per.page}{Maximum plots per page.}
   \item{\dots}{Other arguments passed to \code{Data} and \code{SData}.}
 }
-\details{
-}
+
 \value{
   Returned is the matrix of values from the table. \code{parm.summary} and
   \code{cov.summary} produce summaries of parameters and covariates,
@@ -92,8 +91,7 @@ parm.summary(object,
    the screen.
 }
 \author{Andrew Hooker & Justin Wilkins}
-\note{
-}
+
 \seealso{
   \code{\link[xpose4data]{Data}},
   \code{\link[xpose4data]{SData}},
@@ -105,10 +103,14 @@ parm.summary(object,
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
-
-parm.summary(xpdb5)
-
-cov.summary(xpdb5)
 }
+
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
+
+parm.summary(xpdb)
+
+cov.summary(xpdb)
 }
 \keyword{methods}

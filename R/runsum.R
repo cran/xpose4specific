@@ -22,22 +22,24 @@
 # along with this program.  A copy can be cound in the R installation
 # directory under \share\licenses. If not, see http://www.gnu.org/licenses/.
 
-runsum <- function(object,
-                   modfile=paste("run",object@Runno,".mod",sep=""),
-                   listfile=paste("run",object@Runno,".lst",sep=""),
-                   main=NULL,
-                   subset=xsubset(object),
-                   show.plots=TRUE,
-                   txt.cex=0.7,
-                   txt.font=1,
-                   show.ids=FALSE,
-                   param.table=TRUE,
-                   txt.columns=2,
-                   force.wres=FALSE,
-                   ...
-                   ) {
-
-
+runsum <-
+  function(object,
+           dir="",
+           modfile=paste(dir,"run",object@Runno,".mod",sep=""),
+           listfile=paste(dir,"run",object@Runno,".lst",sep=""),
+           main=NULL,
+           subset=xsubset(object),
+           show.plots=TRUE,
+           txt.cex=0.7,
+           txt.font=1,
+           show.ids=FALSE,
+           param.table=TRUE,
+           txt.columns=2,
+           force.wres=FALSE,
+           ...)
+{
+  
+  
   ## Read model file
   if(is.readable.file(modfile)) {
     modfile <- scan(modfile,sep="\n",what=character(),quiet=TRUE)
@@ -68,27 +70,27 @@ runsum <- function(object,
   }
   text.size <- 1 - (graph.size + graph2.size + title.size)
   title.vp <- viewport(x=0, y=1, just=c("left","top"),
-                       w=1, h=title.size,
+                       width=1, height=title.size,
                        name="title.vp")
 
   graph.1.vp <-(viewport(x=0, y=1-title.size, just=c("left","top"),
-                         w=.25, h=graph.size,
+                         width=.25, height=graph.size,
                                         #layout=grid.layout(1,4),
                          name="graph.1.vp"))
   graph.2.vp <-(viewport(x=.25, y=1-title.size, just=c("left","top"),
-                         w=.25, h=graph.size,
+                         width=.25, height=graph.size,
                                         #layout=grid.layout(1,4),
                          name="graph.2.vp"))
   graph.3.vp <-(viewport(x=.50, y=1-title.size, just=c("left","top"),
-                         w=.25, h=graph.size,
+                         width=.25, height=graph.size,
                                         #layout=grid.layout(1,4),
                          name="graph.3.vp"))
   graph.4.vp <-(viewport(x=.75, y=1-title.size, just=c("left","top"),
-                         w=.25, h=graph.size,
+                         width=.25, height=graph.size,
                                         #layout=grid.layout(1,4),
                          name="graph.4.vp"))
   graph.5.vp <-(viewport(x=0, y=1-title.size-graph.size, just=c("left","top"),
-                         w=1, h=graph2.size,
+                         width=1, height=graph2.size,
                                         #layout=grid.layout(1,4),
                          name="graph.5.vp"))
 
@@ -103,8 +105,8 @@ runsum <- function(object,
     textColumnList[[col.num]] <- viewport(x=x.val,
                                           y=text.size,
                                           just=c("left","top"),
-                                          w=w.val,
-                                          h=text.size,
+                                          width=w.val,
+                                          height=text.size,
                                           gp=gpar(lineheight=1.0,
                                             cex=txt.cex,font=txt.font
                                             ),
@@ -317,9 +319,10 @@ runsum <- function(object,
   space.avail <- TRUE
 
   ## Add the termination messages
-  if(seenterm == 1 && space.avail) {
+  
+  if(parameter.list$seenterm == 1 && space.avail) {
 
-    termtxt <- term
+    termtxt <- parameter.list$term
 
     txt.marker <- add.grid.text(txt=termtxt,
                                 ystart=ystart,
@@ -333,8 +336,8 @@ runsum <- function(object,
   }
 
   ## Add objective
-  if(seenobj == 1 && space.avail) {
-    obj.txt <- paste("Objective:",ofv)
+  if(parameter.list$seenobj == 1 && space.avail) {
+    obj.txt <- paste("Objective:",parameter.list$ofv)
     txt.marker <- add.grid.text(txt=obj.txt,
                                 ystart=ystart,
                                 vp=text.vp.list,
@@ -351,13 +354,13 @@ runsum <- function(object,
   ## Table of parameters and RSEs
 ################################
 
-  table.txt <- list(parnam,format(parval,digits=3))
+  table.txt <- list(parameter.list$parnam,format(parameter.list$parval,digits=3))
   table.col.names <- c("Par","Val")
 
   have.ses   <- 0
-  if(seenseth ==1 || seenseom==1 || seensesi==1) {
+  if(parameter.list$seenseth ==1 || parameter.list$seenseom==1 || parameter.list$seensesi==1) {
     have.ses     <- 1
-    table.txt <- list(parnam,format.default(parval,digits=3),separval)
+    table.txt <- list(parameter.list$parnam,format.default(parameter.list$parval,digits=3),parameter.list$separval)
     table.col.names <- c("Par","Val","RSE")
   }
 

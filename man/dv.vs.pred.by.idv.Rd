@@ -72,16 +72,20 @@ dv.vs.pred.by.idv(object,
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
+}
+
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
 
 ## A vanilla plot
-dv.vs.pred.by.idv(xpdb5)
+dv.vs.pred.by.idv(xpdb)
 
 ## Custom axis labels
-dv.vs.pred.by.idv(xpdb5, ylb="DV", xlb="PRED")
+dv.vs.pred.by.idv(xpdb, ylb="DV", xlb="PRED")
 
-## Custom colours and symbols, no IDs
-dv.vs.pred.by.idv(xpdb5, cex=0.6, pch=3, col=1, ids=FALSE)
-}
+## Custom colours and symbols, IDs
+dv.vs.pred.by.idv(xpdb, cex=0.6, pch=3, col=1, ids=TRUE)
 
 }
 \keyword{methods}

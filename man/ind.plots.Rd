@@ -141,18 +141,22 @@ ind.plots(object,
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
+}
+
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
 
 ## A vanilla plot
-ind.plots(xpdb5)
+ind.plots(xpdb)
 
 ## Monochrome, suitable for manuscript or report
-ind.plots(xpdb5, 
+ind.plots(xpdb, 
   subset="ID>40 & ID<57", 
   col=c(1,1,1), 
   lty=c(0,2,3), 
   strip=function(..., bg) 
     strip.default(..., bg="grey"))
-}
 
 }
 \keyword{methods}

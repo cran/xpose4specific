@@ -39,6 +39,7 @@ absval.wres.vs.pred.by.cov(object,
            ylb  = "|WRES|",
            type="p",
            smooth=TRUE,
+           ids = FALSE,
            idsdir="up",
            main="Default",
            ...)
@@ -46,7 +47,9 @@ absval.wres.vs.pred.by.cov(object,
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{object}{An xpose.data object. }
-  \item{ylb}{A string giving the label for the y-axis. \code{NULL} if none.}
+  \item{ylb}{A string giving the label for the y-axis. \code{NULL} if
+    none.}
+  \item{ids}{Logical. Should id labels on points be shown?}
   \item{idsdir}{Direction for displaying point labels. The default is "up",
     since we are displaying absolute values. }
   \item{type}{Type of plot. The default is points only ("p"), but lines ("l")
@@ -85,15 +88,19 @@ absval.wres.vs.pred.by.cov(object,
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
 
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
+
 ## A vanilla plot
-absval.wres.vs.pred.by.cov(xpdb5)
+absval.wres.vs.pred.by.cov(xpdb)
 
 ## Custom axis labels
-absval.wres.vs.pred.by.cov(xpdb5, ylb="|CWRES|", xlb="PRED")
+absval.wres.vs.pred.by.cov(xpdb, ylb="|CWRES|", xlb="PRED")
 
-## Custom colours and symbols, no IDs
-absval.wres.vs.pred.by.cov(xpdb5, cex=0.6, pch=3, col=1, ids=FALSE)
+## Custom colours and symbols, IDs
+absval.wres.vs.pred.by.cov(xpdb, cex=0.6, pch=3, col=1, ids=TRUE)
+}
 }
 
-}
 \keyword{methods}

@@ -129,16 +129,21 @@
           sub.main=subset
         }
 
-        tmp.label <- xpose.create.label(dv.var,
-                                        object,
-                                        funy,
-                                        logy,...)
+        if(ylb != "Default"){
+          ylb=ylb
+        } else {
+          tmp.label <- xpose.create.label(dv.var,
+                                          object,
+                                          funy,
+                                          logy,...)
         
-        if(file.info$pred.corr && !file.info$var.corr){
-          tmp.label <- paste(tmp.label,"\n(Pred Corr)")
-        }
-        if(file.info$pred.corr && file.info$var.corr){
-          tmp.label <- paste(tmp.label,"\n(Pred and Var Corr)")
+          if(file.info$pred.corr && !file.info$var.corr){
+            tmp.label <- paste(tmp.label,"\n(Pred Corr)")
+          }
+          if(file.info$pred.corr && file.info$var.corr){
+            tmp.label <- paste(tmp.label,"\n(Pred and Var Corr)")
+          }
+          ylb=tmp.label
         }
 
         ## make the VPC
@@ -157,7 +162,7 @@
                                     main=sub.main,
                                     main.cex=main.sub.cex,
                                     inclZeroWRES=inclZeroWRES,
-                                    ylb = tmp.label,
+                                    ylb = ylb,
                                     funy=funy,
                                     logy=logy,
                                     ...)
@@ -233,6 +238,7 @@
         }
         ylb=tmp.label
       }
+
       ## make the VPC
       xplot <- xpose.plot.default(idv.var,#xvardef("idv",object),
                                   dv.var,#xvardef("dv",object),

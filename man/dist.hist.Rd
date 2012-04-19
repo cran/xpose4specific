@@ -72,8 +72,7 @@ ranpar.hist(object,
   Delivers a stack of histograms.
 }
 \author{Andrew Hooker & Justin Wilkins}
-\note{
-}
+
 \seealso{
 \code{\link[xpose4generic]{xpose.plot.histogram}},
 \code{\link[xpose4generic]{xpose.panel.histogram}},
@@ -86,13 +85,19 @@ ranpar.hist(object,
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
+}
 
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
+
+\dontrun{
 ## A stack of parameter histograms, with 3 mirror panes
-parm.hist(xpdb5, mirror=3)
+parm.hist(xpdb, mirror=3)
+}
 
 ## Covariate distribution, in green
-cov.hist(xpdb5, hicol=11, hidcol="DarkGreen", hiborder="White")
-}
+cov.hist(xpdb, hicol=11, hidcol="DarkGreen", hiborder="White")
 }
 \keyword{methods}% at least one, from doc/KEYWORDS
 

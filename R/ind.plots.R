@@ -101,8 +101,8 @@
     plot.num <- 0
     plotList <- vector("list",length(id.levels))
     for (i in id.levels) { 
-                                        
-      new.obj@Data <- subset(old.obj@Data, bin == i)
+
+      new.obj@Data <- old.obj@Data[old.obj@Data$bin==i,] #==subset(old.obj@Data, bin == i)
                                         
       ## Set up the data ##      
       ## Figure out what variables we have defined
@@ -152,7 +152,7 @@
                                   "values",
                                   nobj,
                                   by=id.vals,
-                                  group="ind",
+                                  groups="ind",
                                   iplot=TRUE,
                                   layout=layout,
                                   main=plotTitle,

@@ -22,43 +22,42 @@
 % along with this program.  A copy can be cound in the R installation
 % directory under \share\licenses. If not, see http://www.gnu.org/licenses/.
 
-\name{runsum.print}
-\alias{runsum.print}
-\alias{runsum.old}
+\name{runsum}
 \alias{runsum}
-\alias{add.plots}
 \title{Print run summary in Xpose 4}
 \description{
-  These functions build Xpose run summaries.
+  Function to build Xpose run summaries.
 }
 \usage{
-runsum.print(object,
-             dev = "win",
-             printer = "HP8150",
-             modfile = paste("run", object@Runno, ".mod", sep=""),
-             listfile = paste("run", object@Runno, ".lst", sep=""),
-             new.version=TRUE,
-             print.cex=0.45,
-             ...)
-
-runsum(object,
-           modfile = paste("run", object@Runno, ".mod", sep=""),
-           listfile = paste("run", object@Runno, ".lst", sep = ""),
-           main = NULL, subset = xsubset(object),
-           show.plots = TRUE,
-           txt.cex = 0.7, txt.font = 1,
-           show.ids = FALSE,
-           param.table = TRUE,
-           txt.columns = 2,
+% runsum.print(object,
+%              dev = "win",
+%              printer = "HP8150",
+%              modfile = paste("run", object@Runno, ".mod", sep=""),
+%              listfile = paste("run", object@Runno, ".lst", sep=""),
+%              new.version=TRUE,
+%              print.cex=0.45,
+%              ...)
+    runsum(object,
+           dir="",
+           modfile=paste(dir,"run",object@Runno,".mod",sep=""),
+           listfile=paste(dir,"run",object@Runno,".lst",sep=""),
+           main=NULL,
+           subset=xsubset(object),
+           show.plots=TRUE,
+           txt.cex=0.7,
+           txt.font=1,
+           show.ids=FALSE,
+           param.table=TRUE,
+           txt.columns=2,
            force.wres=FALSE,
            ...)
              
-runsum.old(object,
-             modfile = paste("run", object@Runno, ".mod", sep=""),
-             listfile = paste("run", object@Runno, ".lst", sep=""),
-             main = NULL,
-             subset = xsubset(object),
-             ...)
+% runsum.old(object,
+%              modfile = paste("run", object@Runno, ".mod", sep=""),
+%              listfile = paste("run", object@Runno, ".lst", sep=""),
+%              main = NULL,
+%              subset = xsubset(object),
+%              ...)
 
 % add.plots(object,
 %            main = NULL,
@@ -83,10 +82,12 @@ runsum.old(object,
 }
 \arguments{
   \item{object}{An xpose.data object. }
-  \item{dev}{String, specifying the device to print to. This can be "win",
-    specifying the default Windows printer, or "lpr", specifying a Postscript
-    device.}
-  \item{printer}{The name of the Postscript printer to print to.}
+  % \item{dev}{String, specifying the device to print to. This can be "win",
+  %   specifying the default Windows printer, or "lpr", specifying a Postscript
+  %   device.}
+%  \item{printer}{The name of the Postscript printer to print to.}
+  \item{dir}{The directory to look for the model and output file of a
+    NONMEM run.}
   \item{modfile}{The name of the NONMEM control stream associated with the
     current run.}
   \item{listfile}{The name of the NONMEM output file associated with the
@@ -96,23 +97,21 @@ runsum.old(object,
     the data before plotting. See \code{\link[xpose4data]{xsubset}}.}
 
   \item{show.plots}{Logical indicating if GOF plots should be shown in
-    \code{runsum.new()}.}
-  \item{txt.cex}{Number indicating the size of the txt in
-    \code{runsum.new}.}
-  
-  \item{txt.font}{Font of the text in  \code{runsum.new}.}
+    the run summary.}
+  \item{txt.cex}{Number indicating the size of the txt in the run summary.}
+  \item{txt.font}{Font of the text in the run summary.}
   \item{show.ids}{Logical indicating if IDs should be plotted in the
-    plots for \code{runsum.new}.}
+    plots for the run summary.}
   \item{param.table}{Logical indicating if the parameter table should be
-    shown in \code{runsum.new}.}
-  \item{txt.columns}{The number of text columns in \code{runsum.new}.}
+    shown in the run summary.}
+  \item{txt.columns}{The number of text columns in the run summary.}
   \item{force.wres}{Plot the WRES even if other residuals are available.}
 
-  \item{new.version}{The run summary to create with
-    \code{runsum.print}. If FALSE then \code{runsum} is used, if
-    TRUE then \code{runsum.new} is used.}
-  \item{print.cex}{The size of the text used in \code{runsum.new} when
-    the run summary is output to a printer.}
+  % \item{new.version}{The run summary to create with
+  %   \code{runsum.print}. If FALSE then \code{runsum} is used, if
+  %   TRUE then \code{runsum.new} is used.}
+  % \item{print.cex}{The size of the text used in \code{runsum.new} when
+  %   the run summary is output to a printer.}
   
   %\item{onlyfirst}{Logical value indicating whether only the first row
   %  per individual is included in the plot. }
@@ -135,7 +134,7 @@ runsum.old(object,
   %\item{smlwd}{Line width of the x-y smooth.}
   %\item{smlty}{Line type of the x-y smooth.}
   %\item{smcol}{Line color of the x-y smooth.}
-  \item{ids}{Logical value specifying whether to label data points.}
+  %\item{ids}{Logical value specifying whether to label data points.}
   %\item{idsmode}{Determines the way text labels are added to
   %  plots. \code{NULL} means that only extreme points are
   %  labelled. Non-\code{NULL} means all data points are labelled. (See
@@ -149,22 +148,24 @@ runsum.old(object,
   %  labelling. Possible values are "up", "down" and "both".}
   \item{\dots}{Other arguments passed to the various functions.}
 }
-\details{
-}
+
 \value{
   A compound plot containing an Xpose run summary is created.
 }
 \author{Niclas Jonsson and Andrew Hooker}
-\seealso{
-}
+
 \examples{
 \dontrun{
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
-
-print.runsum(xpdb5,new.version=T)
-
 }
+
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
+
+runsum(xpdb)
+
 }
 \keyword{methods}

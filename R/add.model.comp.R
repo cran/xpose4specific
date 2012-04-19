@@ -29,15 +29,22 @@
            inclZeroWRES = FALSE,
            subset = xsubset(object),
            main="Default",
+           force.wres=FALSE,
+           #ref.default = ".ref.db",
            ...) {
 
     if (is.null(object.ref)) {
       ref.list <- get.refrunno()
-      object.ref <- .ref.db
+      if(exists(".ref.db")){
+        object.ref <- eval(parse(text=".ref.db"))
+      } else {
+        return()
+      }
       if(any(is.null(ref.list)))
         return()
     } 
 
+    
     if(dim(object@Data)[1] != dim(object.ref@Data)[1]) {
       cat("The current database and the reference database do not have\n")
       cat("the same number of lines!\n")
@@ -45,26 +52,44 @@
       return()
     }
 
-    if ((is.null(xvardef("idlab",object))) ||
-        (is.null(xvardef("pred",object))) || 
-        (is.null(xvardef("ipred",object))) ||
-        (is.null(xvardef("iwres",object))) ||
-        (is.null(xvardef("idv",object)))  ||
-        (is.null(xvardef("wres",object)))) {
-      cat("The required variables (ID label, IDV, PRED, IPRED, IWRES,\n and WRES) are not set in the database!\n")
+    if(is.null(check.vars(c("idlab","pred","ipred","iwres","idv"),
+                          object,silent=FALSE))) {      
       return()
-    } 
+    }
+
+    
+    use.cwres=TRUE
+    if(force.wres){
+      use.cwres=FALSE
+      if(is.null(check.vars(c("wres"),object,silent=FALSE))) return()
+    } else {
+      if(is.null(check.vars(c("cwres"),object,silent=TRUE))) {
+        use.cwres=FALSE
+        if(is.null(check.vars(c("wres"),object,silent=FALSE))) return()
+      }
+    }
+
     
     object@Data$PRED.REF <- abs(object.ref@Data[,xvardef("pred", object.ref)])
     object@Data$IPRED.REF <- abs(object.ref@Data[,xvardef("ipred", object.ref)])
-    object@Data$WRES.REF <- abs(object.ref@Data[,xvardef("wres", object.ref)])
+    #object@Data$WRES.REF <- abs(object.ref@Data[,xvardef("wres", object.ref)])
     object@Data$IWRES.REF <- abs(object.ref@Data[,xvardef("iwres", object.ref)])
-    object@Data$dWRES <- abs(object@Data[,xvardef("wres", object)] - object.ref@Data[,xvardef("wres", object.ref)])
+    #object@Data$dWRES <- abs(object@Data[,xvardef("wres", object)] - object.ref@Data[,xvardef("wres", object.ref)])
     object@Data$dIWRES <- abs(object@Data[,xvardef("iwres", object)] - object.ref@Data[,xvardef("iwres", object.ref)])
+
+    if(use.cwres){
+      object@Data$CWRES.REF <- abs(object.ref@Data[,xvardef("cwres", object.ref)])
+      object@Data$dCWRES <- abs(object@Data[,xvardef("cwres", object)] - object.ref@Data[,xvardef("cwres", object.ref)])
+      object@Data[,xvardef("cwres", object)] <- abs(object@Data[,xvardef("cwres", object)])
+    } else {
+      object@Data$WRES.REF <- abs(object.ref@Data[,xvardef("wres", object.ref)])
+      object@Data$dWRES <- abs(object@Data[,xvardef("wres", object)] - object.ref@Data[,xvardef("wres", object.ref)])
+      object@Data[,xvardef("wres", object)] <- abs(object@Data[,xvardef("wres", object)])
+    }
     
     object@Data[,xvardef("pred", object)] <- abs(object@Data[,xvardef("pred", object)])
     object@Data[,xvardef("ipred", object)] <- abs(object@Data[,xvardef("ipred", object)])
-    object@Data[,xvardef("wres", object)] <- abs(object@Data[,xvardef("wres", object)])
+    #object@Data[,xvardef("wres", object)] <- abs(object@Data[,xvardef("wres", object)])
     object@Data[,xvardef("iwres", object)] <- abs(object@Data[,xvardef("iwres", object)])
     
 
@@ -109,31 +134,54 @@
                                    subset = subset,
                                    pass.plot.list = TRUE,
                                    ...)
-    }     
+    }
+    if(use.cwres){
+                                        # |dCWRES| vs IDV
+      if(!any(is.null(xvardef("cwres", object))) && !any(is.null(xvardef("cwres", object.ref)))) {
+        xlb <- paste(xlabel(xvardef("idv",object),object),sep="")
+        ylb <- paste("|dCWRES| (Run ", object@Runno, " - Run ",object.ref@Runno,")",sep="")
+                                        #      main <- paste(ylb, " vs ", xlb, sep="")
+        
+        xplot3 <- xpose.plot.default(xvardef("idv", object),
+                                     "dCWRES",
+                                     object,
+                                     xlb = xlb,
+                                     ylb = ylb,
+                                     main = NULL,
+                                     onlyfirst = onlyfirst,
+                                     inclZeroWRES = inclZeroWRES,
+                                     subset = subset,
+                                     pass.plot.list = TRUE,
+                                     ...) 
+        
+      }
+
+    } else {
                                         # |dWRES| vs IDV
-    if(!any(is.null(xvardef("wres", object))) && !any(is.null(xvardef("wres", object.ref)))) {
-      xlb <- paste(xlabel(xvardef("idv",object),object),sep="")
-      ylb <- paste("|dWRES| (Run ", object@Runno, " - Run ",object.ref@Runno,")",sep="")
-#      main <- paste(ylb, " vs ", xlb, sep="")
-      
-      xplot3 <- xpose.plot.default(xvardef("idv", object),
-                                   "dWRES",
-                                   object,
-                                   xlb = xlb,
-                                   ylb = ylb,
-                                   main = NULL,
-                                   onlyfirst = onlyfirst,
-                                   inclZeroWRES = inclZeroWRES,
-                                   subset = subset,
-                                   pass.plot.list = TRUE,
-                                   ...) 
-      
+      if(!any(is.null(xvardef("wres", object))) && !any(is.null(xvardef("wres", object.ref)))) {
+        xlb <- paste(xlabel(xvardef("idv",object),object),sep="")
+        ylb <- paste("|dWRES| (Run ", object@Runno, " - Run ",object.ref@Runno,")",sep="")
+                                        #      main <- paste(ylb, " vs ", xlb, sep="")
+        
+        xplot3 <- xpose.plot.default(xvardef("idv", object),
+                                     "dWRES",
+                                     object,
+                                     xlb = xlb,
+                                     ylb = ylb,
+                                     main = NULL,
+                                     onlyfirst = onlyfirst,
+                                     inclZeroWRES = inclZeroWRES,
+                                     subset = subset,
+                                     pass.plot.list = TRUE,
+                                     ...) 
+        
+      }
     }
     
                                         # |dIWRES| vs IDV
     if(!any(is.null(xvardef("iwres", object))) && !any(is.null(xvardef("iwres", object.ref)))) {
       xlb <- paste(xlabel(xvardef("idv",object),object),sep="")
-      ylb <- paste("|dIWRES| (Run ", object@Runno, " - Run ",object.ref@Runno,")",sep="")
+      ylb <- paste("|diWRES| (Run ", object@Runno, " - Run ",object.ref@Runno,")",sep="")
 #      main <- paste(ylb, " vs ", xlb, sep="")
       
       xplot4 <- xpose.plot.default(xvardef("idv", object),

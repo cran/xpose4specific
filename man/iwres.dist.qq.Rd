@@ -58,13 +58,17 @@ iwres.dist.qq(object,
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
+}
+
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
 
 ## A vanilla plot
-iwres.dist.qq(xpdb5)
+iwres.dist.qq(xpdb)
 
 ## A different plotting character
-iwres.dist.qq(xpdb5, pch=4)
-}
+iwres.dist.qq(xpdb, pch=4)
 
 }
 \keyword{methods}

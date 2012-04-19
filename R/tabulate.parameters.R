@@ -22,7 +22,7 @@
 # along with this program.  A copy can be cound in the R installation
 # directory under \share\licenses. If not, see http://www.gnu.org/licenses/.
 
-"tabulate.parameters"  <- function(object,prompt=FALSE,outfile=NULL)
+"tabulate.parameters"  <- function(object,prompt=FALSE,outfile=NULL,dir="")
 {
   if(prompt==TRUE){
     listfile=paste("run",object@Runno,".lst",sep="")
@@ -45,7 +45,7 @@
     }
 
   } else {
-    lstfile = paste("run",object@Runno,".lst",sep="")
+    lstfile = paste(dir,"run",object@Runno,".lst",sep="")
   }
 
   if(is.null(lstfile)) {
@@ -58,24 +58,24 @@
   attach(parameter.list,warn.conflicts=F)  
 
   ## Set up matrix
-    if(any(separval!="" & separval!=0)) {
+    if(any(parameter.list$separval!="" & parameter.list$separval!=0)) {
     ret.mat <- matrix(0,
-                      nrow=length(parval),
+                      nrow=length(parameter.list$parval),
                       ncol=3,
                       dimnames=list(c(),c("Parameter","Value","RSE"))
                       )
-    ret.mat[,1] <- parnam
-    ret.mat[,2] <- parval
-    ret.mat[,3] <- separval
+    ret.mat[,1] <- parameter.list$parnam
+    ret.mat[,2] <- parameter.list$parval
+    ret.mat[,3] <- parameter.list$separval
 
   } else {
     ret.mat <- matrix(0,
-                      nrow=length(parval),
+                      nrow=length(parameter.list$parval),
                       ncol=2,
                       dimnames=list(c(),c("Parameter","Value"))
                       )
-    ret.mat[,1] <- parnam
-    ret.mat[,2] <- parval
+    ret.mat[,1] <- parameter.list$parnam
+    ret.mat[,2] <- parameter.list$parval
   }
 
   class(ret.mat) <- "char.matrix"

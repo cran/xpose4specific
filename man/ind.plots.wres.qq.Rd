@@ -24,20 +24,28 @@
 
 \name{ind.plots.wres.qq}
 \alias{ind.plots.wres.qq}
-\title{Quantile-quantile plots of the weighted residuals (WRES) for each 
+\alias{ind.plots.cwres.qq}
+\title{Quantile-quantile plots of weighted residuals for each 
   individual in an Xpose data object, for Xpose 4}
 \description{
   This is a compound plot consisting of QQ plots of the distribution of
-  weighted residuals (WRES) for every individual in the dataset, a specific 
-  function in Xpose 4. It is a wrapper encapsulating arguments to the 
-  \code{xpose.plot.qq} function. 
+  weighted residuals (any weighted residual produced by NONMEM) for
+  every individual in the dataset.
+  The function is a wrapper encapsulating arguments to the 
+  \code{\link[xpose4generic]{xpose.plot.qq}} function. 
 }
 \usage{
 ind.plots.wres.qq(object,
            main = "Default",
+           wres="wres",
            layout=c(4,4),
            inclZeroWRES=FALSE,
            subset=xsubset(object),
+           scales=list(cex=0.7,tck=0.5),
+           aspect="fill",
+           force.by.factor=TRUE,
+           ids=F,
+           as.table=TRUE,
            type="o",
            pch=object@Prefs@Graph.prefs$pch,
            col=object@Prefs@Graph.prefs$col,
@@ -50,21 +58,33 @@ ind.plots.wres.qq(object,
            mirror=NULL,
            max.plots.per.page=1,
            ...)
+
+ind.plots.cwres.qq(object,
+           wres="cwres",
+           ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{object}{An xpose.data object. }
-  \item{inclZeroWRES}{Logical value indicating whether rows with WRES=0
-    is included in the plot. The default is FALSE. }
   \item{main}{The title of the plot.  If \code{"Default"} then a default
     title is plotted. Otherwise the value should be a string like
     \code{"my title"} or \code{NULL} for no plot title.  For
     \code{"Default"} the function
     \code{\link[xpose4generic]{xpose.multiple.plot.title}} is used.}
+  \item{wres}{Which weighted residual should we plot? Defaults to the WRES.}
   \item{layout}{A list giving the layout of the graphs on the plot, in
     columns and rows. The default is 4x4.}
+  \item{inclZeroWRES}{Logical value indicating whether rows with WRES=0
+    is included in the plot. The default is FALSE.}
   \item{subset}{A string giving the subset expression to be applied to
     the data before plotting. See \code{\link[xpose4data]{xsubset}}.}
+
+  \item{scales}{See \code{\link[xpose4generic]{xpose.plot.qq}}.}
+  \item{aspect}{See \code{\link[xpose4generic]{xpose.plot.qq}}.}
+  \item{force.by.factor}{See \code{\link[xpose4generic]{xpose.plot.qq}}.}
+  \item{ids}{See \code{\link[xpose4generic]{xpose.plot.qq}}.}
+  \item{as.table}{See \code{\link[xpose4generic]{xpose.plot.qq}}.}
+  
   \item{type}{1-character string giving the type of plot desired.  The
     following values are possible, for details, see 'plot': '"p"'
     for points, '"l"' for lines, '"o"' for overplotted points and
@@ -91,17 +111,17 @@ ind.plots.wres.qq(object,
   \item{\dots}{Other arguments passed to \code{link[xpose4generic]{xpose.plot.qq}}.}
 }
 \details{
-  Matrices of QQ plots of the weighted residuals (WRES) in each included 
+  Matrices of QQ plots of weighted residuals in each included 
   individual are displayed. 
   
   A wide array of extra options controlling QQ plots are 
   available. See \code{\link[xpose4generic]{xpose.plot.qq}} for details.
 }
 \value{
-  Returns a compound plot comprising QQ plots of weighted residuals (WRES)
+  Returns a compound plot comprising QQ plots of weighted residuals
   conditioned on individual.
 }
-\author{E. Niclas Jonsson, Mats Karlsson, Andrew Hooker & Justin Wilkins}
+\author{E. Niclas Jonsson, Mats Karlsson, Justin Wilkins & Andrew Hooker}
 \seealso{
   \code{\link[xpose4generic]{xpose.plot.qq}},
   \code{\link[xpose4generic]{xpose.panel.qq}},
@@ -115,13 +135,29 @@ ind.plots.wres.qq(object,
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
-
-## A vanilla plot
-ind.plots.wres.qq(xpdb5)
-
-## Custom colours 
-ind.plots.wres.qq(xpdb5, hicol=5, hidcol=2)
 }
 
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
+
+## A vanilla plot
+ind.plots.wres.qq(xpdb)
+
+## Custom colours 
+ind.plots.wres.qq(xpdb, hicol=5, hidcol=2)
+
+## with a grid
+ind.plots.wres.qq(xpdb,grid=TRUE)
+
+## Subset on ID value
+ind.plots.wres.qq(xpdb,grid=TRUE,subset="ID<10")
+
+## Use CWRES instead
+ind.plots.wres.qq(xpdb,grid=TRUE,subset="ID<10",wres="cwres")
+ind.plots.cwres.qq(xpdb,grid=TRUE,subset="ID<10")
+
+## Use NPDEs instead
+ind.plots.wres.qq(xpdb,grid=TRUE,subset="ID<10",wres="NPDE")
 }
 \keyword{methods}

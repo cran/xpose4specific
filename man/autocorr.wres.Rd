@@ -24,10 +24,11 @@
 
 \name{autocorr.wres}
 \alias{autocorr.wres}
+\alias{autocorr.iwres}
 \title{Autocorrelation of weighted residuals for Xpose 4}
 \description{
-  This is an autocorrelation plot of weighted residuals, a specific function 
-  in Xpose 4. Most of the options take their default values from xpose.data 
+  This is an autocorrelation plot of weighted residuals.
+  Most of the options take their default values from the xpose.data 
   object but may be overridden by supplying them as arguments.
 }
 \usage{
@@ -35,6 +36,14 @@ autocorr.wres(object,
            type="p",
            smooth=TRUE,
            ids=F,
+           main = "Default",
+           ...)
+
+autocorr.iwres(object,
+           type="p",
+           smooth=TRUE,
+           ids=F,
+           main = "Default",
            ...)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -51,6 +60,11 @@ autocorr.wres(object,
   \item{ids}{A logical value indicating whether text labels should be
     used as plotting symbols (the variable used for these symbols
     indicated by the \code{idlab} xpose data variable).}
+  \item{main}{The title of the plot.  If \code{"Default"} then a default
+    title is plotted. Otherwise the value should be a string like
+    \code{"my title"} or \code{NULL} for no plot title.  For
+    \code{"Default"} the function
+    \code{\link[xpose4generic]{xpose.multiple.plot.title}} is used.}
   \item{\dots}{Other arguments passed to \code{link[xpose4generic]{xpose.plot.default}}.}
 }
 \details{
@@ -59,9 +73,10 @@ autocorr.wres(object,
   details.
 }
 \value{
-  Returns an aotocorrelation plot for conditional weighted population residuals (CWRES).
+  Returns an aotocorrelation plot for weighted population residuals
+           (WRES) or individual weighted residuals (IWRES).
 }
-\author{E. Niclas Jonsson, Mats Karlsson, Andrew Hooker & Justin Wilkins}
+\author{E. Niclas Jonsson, Mats Karlsson, Justin Wilkins & Andrew Hooker}
 \seealso{
   \code{\link[lattice]{xyplot}},
   \code{\link[xpose4data]{xpose.prefs-class}},
@@ -72,19 +87,25 @@ autocorr.wres(object,
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
-
-## A vanilla plot
-autocorr.wres(xpdb5)
-
-## A conditioning plot
-autocorr.wres(xpdb5, dilution=T)
-
-## Custom heading and axis labels
-autocorr.wres(xpdb5, main="My conditioning plot", ylb="|CWRES|", xlb="PRED")
-
-## Custom colours and symbols, no IDs
-autocorr.wres(xpdb5, cex=0.6, pch=3, col=1, ids=FALSE)
 }
 
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
+
+## A vanilla plot
+autocorr.wres(xpdb)
+
+## A conditioning plot
+autocorr.wres(xpdb, dilution=TRUE)
+
+## Custom heading and axis labels
+autocorr.wres(xpdb, main="My conditioning plot", ylb="|CWRES|", xlb="PRED")
+
+## Custom colours and symbols, IDs
+autocorr.wres(xpdb, cex=0.6, pch=3, col=1, ids=TRUE)
+
+## A vanilla plot with IWRES
+autocorr.iwres(xpdb)
 }
 \keyword{methods}

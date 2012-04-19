@@ -22,46 +22,63 @@
 % along with this program.  A copy can be cound in the R installation
 % directory under \share\licenses. If not, see http://www.gnu.org/licenses/.
 
-\name{absval.cwres.vs.pred}
-\alias{absval.cwres.vs.pred}
-\title{Absolute population conditional weighted residuals vs population predictions for
-  Xpose 4}
+\name{absval.wres.vs.idv}
+\alias{absval.wres.vs.idv}
+%- Also NEED an '\alias' for EACH other topic documented here.
+\title{
+Absolute value of (C)WRES vs. independent variable plot in Xpose4.
+}
 \description{
-  This is a plot of absolute population conditional weighted residuals (|CWRES|) vs
-  population predictions (PRED), a specific function in Xpose 4. It is a
-  wrapper encapsulating arguments to the \code{xpose.plot.default} function.
-  Most of the options take their default values from xpose.data object but
+  This is a plot of the absolute value of the CWRES (default, other
+  residuals as an option) vs
+  independent variable, a specific function in Xpose 4. It is a
+  wrapper encapsulating arguments to the \code{\link[xpose4generic]{xpose.plot.default}} function.
+  Most of the options take their default values from the xpose.data object but
   may be overridden by supplying them as arguments.
 }
 \usage{
-absval.cwres.vs.pred(object,
-           idsdir="up",
-           type="p",
-           smooth=TRUE,
-           ...)
+absval.wres.vs.idv(object,
+                   idv = "idv",
+                   wres = "Default",
+                   ylb = "Default",
+                   smooth = TRUE,
+                   idsdir = "up",
+                   type = "p",
+                   ...)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{object}{An xpose.data object. }
+  \item{idv}{ 
+    the independent variable.
+  }
+  \item{wres}{
+    Which weighted residual to use. \code{"Default"} is the CWRES.
+  }
+  \item{ylb}{
+    Y-axis label.
+  }
+  \item{smooth}{Logical value indicating whether an x-y smooth should be superimposed.
+    The default is TRUE.}
   \item{idsdir}{Direction for displaying point labels. The default is "up",
     since we are displaying absolute values. }
   \item{type}{Type of plot. The default is points only ("p"), but lines ("l")
     and both ("b") are also available.}
-  \item{smooth}{Logical value indicating whether an x-y smooth should be superimposed.
-    The default is TRUE.}
   \item{\dots}{Other arguments passed to \code{link[xpose4generic]{xpose.plot.default}}.}
 }
 \details{
-  Conditional weighted residuals (CWRES) require some extra steps to
-  calculate. See \code{\link[xpose4generic]{compute.cwres}} for details.
-  
   A wide array of extra options controlling xyplots are 
   available. See \code{\link[xpose4generic]{xpose.plot.default}} for details.
 }
 \value{
-  Returns an xyplot of |CWRES| vs PRED.
+  Returns an xyplot of |CWRES| vs idv (often TIME, defined by \code{\link[xpose4data]{xvardef}}).
 }
-\author{E. Niclas Jonsson, Mats Karlsson, Andrew Hooker & Justin Wilkins}
+\author{
+Andrew Hooker
+}
+
+%% ~Make other sections like Warning with \section{Warning }{....} ~
+
 \seealso{
   \code{\link[xpose4generic]{xpose.plot.default}},
   \code{\link[xpose4generic]{xpose.panel.default}},
@@ -69,6 +86,7 @@ absval.cwres.vs.pred(object,
   \code{\link[xpose4data]{xpose.prefs-class}},
   \code{\link[xpose4generic]{compute.cwres}},
   \code{\link[xpose4data]{xpose.data-class}}
+%% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
 \dontrun{
@@ -82,16 +100,24 @@ data(simpraz.xpdb)
 xpdb <- simpraz.xpdb
 
 ## A vanilla plot
-absval.cwres.vs.pred(xpdb)
+absval.wres.vs.idv(xpdb)
 
 ## A conditioning plot
-absval.cwres.vs.pred(xpdb, by="HCTZ")
+absval.wres.vs.idv(xpdb, by="HCTZ")
 
 ## Custom heading and axis labels
-absval.cwres.vs.pred(xpdb, main="My conditioning plot", ylb="|CWRES|", xlb="PRED")
+absval.wres.vs.idv(xpdb, main="Hello World", ylb="|CWRES|", xlb="IDV")
 
-## Custom colours and symbols, no IDs
-absval.cwres.vs.pred(xpdb, cex=0.6, pch=3, col=1, ids=FALSE)
+## Custom colours and symbols
+absval.wres.vs.idv(xpdb, cex=0.6, pch=3, col=1)
+
+## using the NPDEs instead of CWRES
+absval.wres.vs.idv(xpdb,wres="NPDE")
+
+## subsets
+absval.wres.vs.idv(xpdb,subset="TIME<10")
 
 }
+
 \keyword{methods}
+

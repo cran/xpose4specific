@@ -99,8 +99,7 @@ cov.splom(object,
   Delivers a scatterplot matrix.
 }
 \author{Andrew Hooker & Justin Wilkins}
-\note{
-}
+
 \seealso{
 \code{\link[xpose4generic]{xpose.plot.splom}},
 \code{\link[xpose4generic]{xpose.panel.splom}},
@@ -113,16 +112,20 @@ cov.splom(object,
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
+}
+
+## Here we load the example xpose database from the xpose4data package
+data(simpraz.xpdb)
+xpdb <- simpraz.xpdb
 
 ## A scatterplot matrix of parameters, grouped by sex
-parm.splom(xpdb5, groups="SEX")
+parm.splom(xpdb, groups="SEX")
 
 ## A scatterplot matrix of ETAs, grouped by sex
-ranpar.splom(xpdb5, groups="SEX")
+ranpar.splom(xpdb, groups="SEX")
 
 ## Covariate scatterplots, with text customization
-cov.splom(xpdb5, varname.cex=0.4, axis.text.cex=0.4, smooth=NULL, cex=0.4)
-}
+cov.splom(xpdb, varname.cex=0.4, axis.text.cex=0.4, smooth=NULL, cex=0.4)
 }
 \keyword{methods}% at least one, from doc/KEYWORDS
 

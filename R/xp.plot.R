@@ -54,7 +54,7 @@
 
 
         #current.gam$terms
-    if(length(attr(current.gam$terms,"factors"))==0){
+    if(length(attr(eval(parse(text="current.gam$terms")),"factors"))==0){
       ##if (length(current.gam$terms)==0){
       cat("\nNo covariates found for this parameter\n")
       return()
@@ -64,9 +64,9 @@
     #assign(pos=1,"gamdata",current.gam$data)
     #assign(pos=1,"form",current.gam$form)
 
-    final.gam <- gam(current.gam$form,
-                     weights=current.gam$weights,
-                     data=current.gam$data)
+    final.gam <- gam(eval(parse(text="current.gam$form")),
+                     weights=eval(parse(text="current.gam$weights")),
+                     data=eval(parse(text="current.gam$data")))
 
     #pre.obj <- preplot.gam(final.gam)
     ## HERE is the problem browser()
@@ -77,8 +77,8 @@
     numplots <- length(trms)
 
     ## Partial residuals
-    parts <- predict(current.gam,type="terms") +
-      residuals(current.gam,type="pearson")
+    parts <- predict(eval(parse(text="current.gam")),type="terms") +
+      residuals(eval(parse(text="current.gam")),type="pearson")
     ylm <- range(parts)
 
     ## add 10% to range
@@ -91,10 +91,10 @@
     ##plot(final.gam,residuals=TRUE,rugplot=FALSE,scale=ylmm)
 
     ## Get the idlabs
-    if(any(is.null(current.gam$data$ID))){
+    if(any(is.null(eval(parse(text="current.gam$data$ID"))))){
       ids <- "n"
     } else {
-      ids <- current.gam$data$ID
+      ids <- eval(parse(text="current.gam$data$ID"))
     }
 
 
@@ -175,9 +175,9 @@
       plotList[[i]] <- xplot
 }
 
-    plotTitle <- paste("GAM results for covariates on ", current.gam$pars,
+    plotTitle <- paste("GAM results for covariates on ", eval(parse(text="current.gam$pars")),
                         " (Run ",
-                        current.gam$runno, ")",
+                        eval(parse(text="current.gam$runno")), ")",
                         sep="")
 
     obj <- xpose.multiple.plot(plotList,plotTitle,...)
