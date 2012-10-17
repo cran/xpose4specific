@@ -135,7 +135,6 @@ ind.plots.cwres.qq(object,
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
-}
 
 ## Here we load the example xpose database from the xpose4data package
 data(simpraz.xpdb)
@@ -159,5 +158,6 @@ ind.plots.cwres.qq(xpdb,grid=TRUE,subset="ID<10")
 
 ## Use NPDEs instead
 ind.plots.wres.qq(xpdb,grid=TRUE,subset="ID<10",wres="NPDE")
+}
 }
 \keyword{methods}

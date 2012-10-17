@@ -128,7 +128,7 @@ ind.plots.cwres.hist(object,
 ## We expect to find the required NONMEM run and table files for run
 ## 5 in the current working directory
 xpdb5 <- xpose.data(5)
-}
+
 
 ## Here we load the example xpose database from the xpose4data package
 data(simpraz.xpdb)
@@ -154,5 +154,6 @@ ind.plots.wres.hist(xpdb, subset="ID<10 | ID>45",grid=TRUE)
 ind.plots.wres.hist(xpdb, wres="CWRES")
 ind.plots.cwres.hist(xpdb)
 ind.plots.cwres.hist(xpdb, subset="ID<10 | ID>45",grid=TRUE)
+}
 }
 \keyword{methods}

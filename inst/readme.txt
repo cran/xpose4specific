@@ -1,4 +1,4 @@
-Xpose 4.3.5 (2012-04-19)
+Xpose 4.4.0 (2012-10-17)
 --------------------------------------------
 by Andrew C. Hooker, Justin J. Wilkins, Mats O. Karlsson 
 and E. Niclas Jonsson

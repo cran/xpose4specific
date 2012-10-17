@@ -1,6 +1,15 @@
 Xpose 4 Changelog
 -----------------
-Latest (xpose 4.3.5)
+xpose 4.4.0
+  * Added bootstrap of the GAM and diagnostics for the boostrap of the
+    PsN function boot_scm. 
+
+xpose 4.3.6
+
+  * fixed the plot in the classic menu system "Weighted residuals vs
+    covariates". 
+
+xpose 4.3.5
   * Updated help files with workable examples, and an example
     dataset.  Look at data(simpraz.xpdb), simprazExample() and
     example(xpose.data) for dataset examples and example(basic.gof)

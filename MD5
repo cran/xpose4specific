@@ -1,4 +1,4 @@
-57228c7b44c5bf5055701f9069b59f8d *DESCRIPTION
+064b2d2b069e8285f2f64bef2239e679 *DESCRIPTION
 311acd07eb0545305366a3b10d271427 *NAMESPACE
 90ab524ba977abd14328aad34992a847 *R/absval.cwres.vs.cov.bw.R
 a18231501fce069fd667860bb7bafd9c *R/absval.cwres.vs.pred.R
@@ -26,6 +26,8 @@ d3af06951e6ce7e93292dbc0c44ff11d *R/autocorr.iwres.R
 e36ea13adb82aad3b01895470e1ac039 *R/autocorr.wres.R
 1053a131c58ba2b3e7e05f765ba76a5a *R/basic.gof.R
 c2839bd9483568d599707b5e4f2b5886 *R/basic.model.comp.R
+8b838a2bf257a154649c711934d0ad25 *R/bootgam.R
+01dc4a5f14255417a2d130a7d52bd0ec *R/bootgam.plots.R
 cb00ff4dd2fefa1dc4e2b816ec2ab2eb *R/cat.dv.vs.idv.sb.R
 a822c2d307b5dcafc1a5ef714e30111d *R/cat.pc.R
 0318957e6e6673c0a0fe9e86d69a787c *R/check.gamobj.R
@@ -66,7 +68,7 @@ e1363a491ad8ee413bf4a2aa704b1a35 *R/ind.plots.cwres.qq.R
 77f25922c1cd9040ee5d22829626805a *R/iwres.dist.hist.R
 1fcfb7f979e272f61db4d8a5ac5889b5 *R/iwres.dist.qq.R
 9e9bd960b7517ba3d37735d596897b5c *R/iwres.vs.idv.R
-26b154370641d7b05437c652a4b53546 *R/kaplan.plot.R
+511f89f50bb0906885f3b4710e88095a *R/kaplan.plot.R
 228947113bfcdacc53b588c86578400d *R/npc.coverage.R
 0b635f7d86f54aab326d118304a6e575 *R/parm.hist.R
 616eac3276cf7b9ff108351f13f833ad *R/parm.qq.R
@@ -106,8 +108,8 @@ ec8e7dcd902b35095295e84f5900d5ff *R/xpose.VPC.R
 43804e3bf0509aec111087fb3ae51469 *R/xpose.gam.R
 a9d2352c9a447e3693fdf42f8eeca28d *R/xpose.license.citation.R
 8af910abc1b2d5072c93e9004d2c1a97 *inst/CITATION
-172ca3d39a0e0b7b2e215481810fff70 *inst/changelog.txt
-7be8dbe5703d9ade36aa752f23d7f09a *inst/readme.txt
+5d327cb470677f812c82c7893fa64f22 *inst/changelog.txt
+65b6b73ca13facddf8f7b87fa932d52e *inst/readme.txt
 9b29578d10578a5c4241a6d62c6f0744 *man/absval.cwres.vs.cov.bw.Rd
 8322d2a37d8e3c1352d3fb20a8732519 *man/absval.cwres.vs.pred.Rd
 c36529613f1ae3e6abf6c49a9cc81a66 *man/absval.cwres.vs.pred.by.cov.Rd
@@ -126,6 +128,7 @@ f8ba5d67a90387b8795d78b296f6ad7f *man/addit.gof.Rd
 ae27d43749ded932fa3ffdeda0f3dc3c *man/autocorr.wres.Rd
 bea32f3a7b6cfbd28e54cdc00d8d7c1b *man/basic.gof.Rd
 191ee0f72389c4a03ae2fa5ce17f992a *man/basic.model.comp.Rd
+a819a07312706cbd3b7b72213cbadcff *man/bootgam.print.Rd
 edcc2e94c2acd7bf6a84a4a300cf54cc *man/cat.dv.vs.idv.sb.Rd
 ac6d3e461cda1dc99ac65a9f5cd6af3c *man/cat.pc.Rd
 6e0e4c484e7394f0e03db7dd3fcbb661 *man/cwres.dist.hist.Rd
@@ -153,8 +156,8 @@ dcf00c411a3ca736607471afff10f753 *man/dv.vs.pred.by.cov.Rd
 e61d2eb4f8f6ea251bb906f9a131e52c *man/dv.vs.pred.ipred.Rd
 db486ce59c56690c25ae8ce2cdb6cfd7 *man/gof.Rd
 6507a009b95d02fcf4babe3b9f86b3fa *man/ind.plots.Rd
-828a3b8777fdfb05a40183c7fac8ac1c *man/ind.plots.wres.hist.Rd
-308d56875574574efbea94829ae38c33 *man/ind.plots.wres.qq.Rd
+8da9300b6d40d747d27ea06cf2d57805 *man/ind.plots.wres.hist.Rd
+479dc7869ab28a56b7631bb876f81721 *man/ind.plots.wres.qq.Rd
 abfdc87c68df9ef8062ea059cc986dd9 *man/ipred.vs.idv.Rd
 8756145a84de54d4ddd9588f05fba1ec *man/iwres.dist.hist.Rd
 435e480c65d915049e0c4612ba39a837 *man/iwres.dist.qq.Rd
@@ -176,10 +179,21 @@ ac9305441328f9a4273d7ee945b54818 *man/wres.vs.cov.Rd
 7ae595a750bae58ed6eedb11e5498838 *man/wres.vs.idv.bw.Rd
 350e26d57b86f17addc831270b27a449 *man/wres.vs.pred.Rd
 df6c2e4568cc3ff93b640bb08357e1e2 *man/wres.vs.pred.bw.Rd
+db03b6c32224a071a54ea162a1ac35e3 *man/xp.boot.par.est.Rd
+df17c33f24ab6f30a2685807170c4761 *man/xp.boot.par.est.corr.Rd
+07db7b0596c7f202f7c892cca3504e7d *man/xp.distr.mod.size.Rd
+237966b59ae3707cd4f5fe600430db0b *man/xp.dofv.plot.Rd
 cf55556fe68898f803bf1a030943be26 *man/xp.gam.Rd
+b109097a7a1e8eb9ccc82e7cea4959ec *man/xp.inc.prob.Rd
+55a9b53a9a15d3106c2f1ca6523c9433 *man/xp.inc.prob.comb.2.Rd
+7334286b2f8818fc505111de0dbf110f *man/xp.inc.stab.cov.Rd
+7fa4f06bc4f9fdcd15fe750a7a087558 *man/xp.incl.index.cov.Rd
+4cdd4ad662eeda4db6186f9e86c9bf38 *man/xp.incl.index.cov.comp.Rd
+c8c8951607f59dbc0585b5d9081278cf *man/xp.incl.index.cov.ind.Rd
 48182eb53ff58443d283f3377df6126d *man/xpose.VPC.Rd
 76603b4341dfe7b7ef091b603d5968c0 *man/xpose.VPC.both.Rd
 a6deb2c5572177901f8e723eff60fb84 *man/xpose.VPC.categorical.Rd
 895150ca38fe6c9cd5f9df0545ea8443 *man/xpose.gam.Rd
 7b9fd73dc91476e9c71b39aab01f01a8 *man/xpose.license.citation.Rd
+e4e970e90d326a869c6c94e85039617b *man/xpose4specific-internal.Rd
 249efec8ccf91ba6d42d5eb409e04182 *man/xpose4specific-package.Rd

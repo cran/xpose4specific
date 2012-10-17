@@ -254,7 +254,7 @@ kaplan.plot <-
       ##   y="tmp.event"
       ## }
 
-      ##browser()
+      browser()
 
       S <- Surv(data[,x],data[,y])
       ##f.1 <- survfit(S)
@@ -262,8 +262,10 @@ kaplan.plot <-
       f.1 <- survfit(S~1)
       a.1 <- summary(f.1)
       # plot(f.1)
-
-      #browser()        
+      ## f.2 <- survfit(S~data[,"DOSE"])
+      ## plot(f.2,lty=1:4,col=1:4,yscale=100,ylab="Survival (%)", xlab="Time")
+      ## legend(350, 1.0, c("Placebo", "10 mg","50 mg", "100 mg"), lty = 1:4,col=1:4) 
+      ##browser()        
       ## ## covariate plots
       cov.plot <- FALSE
       censored.ids <- FALSE
