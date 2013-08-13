@@ -64,7 +64,8 @@ ylab=NULL, col = c(rgb(.8, .5, .5), rgb(.2,
     covariate (both for continuous and categorical covariates).
   }
   \item{by.cov.type}{
-    Split the plot for continuous and dichotomous covariates. Default is FALSE.
+    Split the plot for continuous and dichotomous covariates. 
+    Default is FALSE.
   }
   \item{abs.values}{
     Show the covariate coefficient in absolute values. Default is FALSE.

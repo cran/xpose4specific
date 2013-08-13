@@ -36,7 +36,9 @@
   on the total bootstrap inclusions), divided by expected.}
 
 \usage{
-xp.incl.index.cov.ind(bootgam.obj = NULL, boot.type=NULL, cov.name = NULL, main = NULL, ylb = "ID", xlb = "Individual inclusion index", ...)
+xp.incl.index.cov.ind(bootgam.obj = NULL, boot.type=NULL, cov.name = NULL, 
+                      main = NULL, ylb = "ID", 
+                      xlb = "Individual inclusion index", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

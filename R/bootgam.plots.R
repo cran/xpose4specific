@@ -307,8 +307,9 @@ check.bootgamobj <- function () {
       if (ans != "y" && ans != "") {
         gobjname <- getit()
         if (!is.null(gobjname)) {
-          assign(pos = 1, "current.bootgam", eval(as.name(gobjname)),
+          c1 <- call("assign",pos = 1, "current.bootgam", eval(as.name(gobjname)),
                  immediate = T)
+          eval(c1)
         }
       } else {
         gobjname <- T
@@ -316,8 +317,9 @@ check.bootgamobj <- function () {
     } else {
         gobjname <- getit()
         if (!is.null(gobjname)) {
-            assign(pos = 1, "current.bootgam", eval(as.name(gobjname)),
+            c2 <- call("assign",pos = 1, "current.bootgam", eval(as.name(gobjname)),
                    immediate = T)
+            eval(c2)
         }
     }
     return(gobjname)
@@ -377,7 +379,8 @@ get.boot.obj <- function (bootgam.obj = NULL,
                 cat ("Data not available. Did you import the bootSCM data?\n")
             }
         } else {
-            assign(pos = 1, "current.bootscm", bootgam.obj, immediate = T)
+            c3 <- call("assign",pos = 1, "current.bootscm", bootgam.obj, immediate = T)
+            eval(c3)
         }
     } else { # load bootgam object
         if (is.null(bootgam.obj)) {
@@ -393,7 +396,8 @@ get.boot.obj <- function (bootgam.obj = NULL,
                 }
             }
         } else {
-            assign(pos = 1, "current.bootgam", bootgam.obj, immediate = T)
+            c4 <- call("assign",pos = 1, "current.bootgam", bootgam.obj, immediate = T)
+            eval(c4)
         }
     }
     return(bootgam.obj)

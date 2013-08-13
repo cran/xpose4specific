@@ -70,7 +70,8 @@
       if(ans != "y" && ans != "") {
         gobjname <- getit()
         if(!is.null(gobjname)){
-          assign(pos = 1, "current.gam", eval(as.name(gobjname)),immediate=T)
+          c1 <- call("assign",pos = 1, "current.gam", eval(as.name(gobjname)),immediate=T)
+          eval(c1)
         }
       } else {
         gobjname <- T
@@ -78,7 +79,8 @@
     }  else {
       gobjname <- getit()
       if(!is.null(gobjname)){
-        assign(pos=1, "current.gam", eval(as.name(gobjname)),immediate=T)
+        c2 <- call("assign",pos=1, "current.gam", eval(as.name(gobjname)),immediate=T)
+        eval(c2)
       }
     }
     return(gobjname)

@@ -54,7 +54,7 @@ runsum <-
                                         #txtnrow  <- 63       # Number of rows in each column
 
   parameter.list <- create.parameter.list(listfile)
-  attach(parameter.list,warn.conflicts=F)
+  #attach(parameter.list,warn.conflicts=F)
 
 
   ## Set up screen
@@ -397,7 +397,7 @@ runsum <-
     vp.num <- txt.marker$vp.num
   }
 
-  detach(parameter.list)
+  #detach(parameter.list)
   invisible()
 
                                         #return()

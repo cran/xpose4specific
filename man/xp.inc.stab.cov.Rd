@@ -32,7 +32,9 @@
   iterations have been performed.
 }
 \usage{
-xp.inc.stab.cov(bootgam.obj = NULL, boot.type=NULL, main = NULL, xlb = "Bootstrap replicate number", ylb = "Inclusion frequency", ...)
+xp.inc.stab.cov(bootgam.obj = NULL, boot.type=NULL, main = NULL, 
+                xlb = "Bootstrap replicate number", 
+                ylb = "Inclusion frequency", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

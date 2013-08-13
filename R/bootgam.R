@@ -228,13 +228,16 @@ xp.bootgam <- function (object,
     cat ("\nThese bootstrap replicates will not be used in summaries or diagnostic plots.\n")
     cat ("\n\n")
   }
-  assign(pos = 1, paste("bootgam.xpose.", pars, ".", object@Runno, 
+  c1 <- call("assign",pos = 1, paste("bootgam.xpose.", pars, ".", object@Runno, 
            sep = ""), bootgam.obj, immediate = T)
+  eval(c1)
   if (exists("current.bootgam", where = 1)) {
     remove(pos = 1, "current.bootgam")
   }
-  assign(pos = 1, "current.bootgam", bootgam.obj, immediate = T)
+  c2 <- call("assign",pos = 1, "current.bootgam", bootgam.obj, immediate = T)
+  eval(c2)
   return(invisible(bootgam.obj))
+  
 }
 
 data.long <- function (data) { # same as melt() in reshape: create a dataframe in the long format based on a matrix/data.frame (for xyplot)

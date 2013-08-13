@@ -35,7 +35,7 @@ kaplan.plot(x="TIME",y="DV",id="ID",
            evid="EVID",
            by=NULL,
            xlab="Time",
-           ylab="Survival (\%)",
+           ylab="Default",
            object=NULL,
            events.to.plot="All",
            sim.data=NULL,
@@ -270,12 +270,19 @@ xpdb <- xpose.data(runno)
 ####################################
 
 kaplan.plot(x="TIME",y="DV",object=xpdb)
-kaplan.plot(x="TIME",y="DV",object=xpdb,events.to.plot=c(1,2),by=c("DOSE==0","DOSE!=0"))
-kaplan.plot(x="TIME",y="DV",object=xpdb,events.to.plot=c(1,2),by=c("DOSE==0","DOSE==10","DOSE==50","DOSE==200"))
+kaplan.plot(x="TIME",y="DV",object=xpdb,
+            events.to.plot=c(1,2),
+            by=c("DOSE==0","DOSE!=0"))
+kaplan.plot(x="TIME",y="DV",object=xpdb,
+            events.to.plot=c(1,2),
+            by=c("DOSE==0","DOSE==10",
+            "DOSE==50","DOSE==200"))
 
 ## make a PDF of the plots
 pdf(file=paste("run",runno,"_kaplan.pdf",sep=""))
-kaplan.plot(x="TIME",y="DV",object=xpdb,by=c("DOSE==0","DOSE==10","DOSE==50","DOSE==200"))
+kaplan.plot(x="TIME",y="DV",object=xpdb,
+            by=c("DOSE==0","DOSE==10",
+            "DOSE==50","DOSE==200"))
 dev.off()
 
 ####################################
@@ -283,12 +290,17 @@ dev.off()
 ####################################
 
 kaplan.plot(x="TIME",y="DV",object=xpdb,VPC=T,events.to.plot=c(1))
-kaplan.plot(x="TIME",y="DV",object=xpdb,VPC=T,events.to.plot=c(1,2,3),by=c("DOSE==0","DOSE!=0"))
-kaplan.plot(x="TIME",y="DV",object=xpdb,VPC=T,events.to.plot=c(1),by=c("DOSE==0","DOSE==10","DOSE==50","DOSE==200"))
+kaplan.plot(x="TIME",y="DV",object=xpdb,VPC=T,
+            events.to.plot=c(1,2,3),
+            by=c("DOSE==0","DOSE!=0"))
+kaplan.plot(x="TIME",y="DV",object=xpdb,VPC=T,
+            events.to.plot=c(1),
+            by=c("DOSE==0","DOSE==10","DOSE==50","DOSE==200"))
 
 ## make a PDF of all plots
 pdf(file=paste("run",runno,"_kaplan.pdf",sep=""))
-kaplan.plot(x="TIME",y="DV",object=xpdb,VPC=T,by=c("DOSE==0","DOSE==10","DOSE==50","DOSE==200"))
+kaplan.plot(x="TIME",y="DV",object=xpdb,VPC=T,
+            by=c("DOSE==0","DOSE==10","DOSE==50","DOSE==200"))
 dev.off()
 }
 }

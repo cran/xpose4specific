@@ -55,7 +55,8 @@ absval.cwres.vs.cov.bw(object,
 }
 \details{
   Each of the covariates in the Xpose data object, as specified in 
-  \code{object@Prefs@Xvardef$Covariates}, is evaluated in turn, creating a stack of plots.
+  \code{object@Prefs@Xvardef$Covariates}, is evaluated in turn, 
+  creating a stack of plots.
   
   Conditional weighted residuals (CWRES) require some extra steps to
   calculate. See \code{\link[xpose4generic]{compute.cwres}} for details.

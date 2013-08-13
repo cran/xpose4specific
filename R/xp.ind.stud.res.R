@@ -36,7 +36,8 @@
           } else {
           }
       } else {
-          assign(pos=1, "current.gam", gamobj,immediate=T)
+          c1 <- call("assign",pos=1, "current.gam", gamobj,immediate=T)
+          eval(c1)
       }
 
     if(eval(parse(text="current.gam$family$family")) == "gaussian"){

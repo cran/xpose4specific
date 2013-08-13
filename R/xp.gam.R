@@ -180,13 +180,15 @@
     ##
     ## Save the gam object
     ##
-    assign(pos = 1, paste("gam.xpose.", pars, ".", object@Runno,
+    c1 <- call("assign",pos = 1, paste("gam.xpose.", pars, ".", object@Runno,
              sep= ""), gamobj1, immediate = T)
+    eval(c1)
     
     if(exists("current.gam",where=1)){
       remove(pos=1,"current.gam")
     }
-    assign(pos = 1, "current.gam", gamobj1,immediate=T)
+    c2 <- call("assign",pos = 1, "current.gam", gamobj1,immediate=T)
+    eval(c2)
     
     ##
     ## Return

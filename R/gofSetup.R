@@ -59,6 +59,7 @@ gofSetup <- function(runno,save,onefile,saveType,pageWidth,pageHeight) {
          units="in",bg="white")
     if(saveType=="pdf") pdf(file=saveFileName,width=pageWidth,height=pageHeight,
          onefile=onefile,bg="white")
-    if(saveType=="wmf") win.metafile(filename=saveFileName,width=pageWidth,height=pageHeight)
+    if(saveType=="wmf") eval(parse(text=paste("win.metafile(filename=",saveFileName,
+                                       ",width=",pageWidth,",height=",pageHeight,")",sep="")))
   }
 }

@@ -32,7 +32,8 @@
   reference final scm model.
 }
 \usage{
-xp.dofv.plot(bootscm.obj = NULL, main = NULL, xlb = "Difference in OFV", ylb = "Density", ...)
+xp.dofv.plot(bootscm.obj = NULL, main = NULL, 
+             xlb = "Difference in OFV", ylb = "Density", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

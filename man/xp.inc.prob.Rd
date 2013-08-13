@@ -32,7 +32,8 @@
   obtained in a bootgam or bootscm. Covariates are ordered by inclusion frequency.
 }
 \usage{
-xp.inc.prob(bootgam.obj = NULL, boot.type=NULL, main = NULL, col = "#6495ED", xlb = NULL, ylb = "Covariate", ...)
+xp.inc.prob(bootgam.obj = NULL, boot.type=NULL, main = NULL, 
+            col = "#6495ED", xlb = NULL, ylb = "Covariate", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

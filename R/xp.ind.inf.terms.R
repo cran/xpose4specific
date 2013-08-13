@@ -39,7 +39,8 @@
       } else {
       }
     } else {
-      assign(pos=1, "current.gam", gamobj,immediate=T)
+      c1 <- call("assign",pos=1, "current.gam", gamobj,immediate=T)
+      eval(c1)
     }
 
     if(length(names(coefficients(eval(parse(text="current.gam")))))==0){

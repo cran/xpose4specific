@@ -33,7 +33,8 @@
   dataset than others.
 }
 \usage{
-xp.incl.index.cov.comp(bootgam.obj = NULL, boot.type = NULL, main = NULL, xlb = "Individual inclusion index", ylb = "ID", ...)
+xp.incl.index.cov.comp(bootgam.obj = NULL, boot.type = NULL, main = NULL, 
+                       xlb = "Individual inclusion index", ylb = "ID", ...)
 }
 \arguments{
   \item{bootgam.obj}{

@@ -28,7 +28,8 @@ kaplan.plot <-
            evid="EVID",
            by=NULL,
            xlab="Time",
-           ylab="Survival (%)",
+           #ylab="Survival (%)",
+           ylab="Default",
            object=NULL,
            events.to.plot="All",
            sim.data=NULL,
@@ -87,9 +88,10 @@ kaplan.plot <-
   if(is.null(object) && is.null(data)) cat("one of data or object should be defined in function input.")
   if(!is.null(data)){
     if(!is.null(subset)){
-      on.exit(detach(data))
-      attach(data,warn.conflicts=F)
-      data <- data[eval(parse(text=paste("data$", subset))),]
+      #on.exit(detach(data))
+      #attach(data,warn.conflicts=F)
+      #data <- data[eval(parse(text=paste("data$", subset))),]
+      data<-with(data,data[eval(parse(text=subset)),])
       if(dim(data)[1]==0) return(NULL)
     }
   }
@@ -109,9 +111,11 @@ kaplan.plot <-
   }
   if(!is.null(sim.data)){
     if(!is.null(subset)){
-      on.exit(detach(sim.data))
-      attach(sim.data,warn.conflicts=F)
-      sim.data <- sim.data[eval(parse(text=paste("sim.data$", subset))),]
+      #on.exit(detach(sim.data))
+      #attach(sim.data,warn.conflicts=F)
+      #sim.data <- sim.data[eval(parse(text=paste("sim.data$", subset))),]
+
+      sim.data<-with(sim.data,sim.data[eval(parse(text=subset)),])
       if(dim(sim.data)[1]==0) return(NULL)
     }
   }
@@ -254,7 +258,7 @@ kaplan.plot <-
       ##   y="tmp.event"
       ## }
 
-      browser()
+      #browser()
 
       S <- Surv(data[,x],data[,y])
       ##f.1 <- survfit(S)
@@ -276,15 +280,21 @@ kaplan.plot <-
           data[,cov] <- as.numeric(levels(data[,cov]))[data[,cov]]
         }
         tmp.y.cov <- c()
+        
+        ## the full covariate set
+        tmp.cov.prev <- data[,cov]
+       
         for(i in 1:length(f.1$time)){
           if(f.1$n.censor[i]>0 && f.1$n.event[i]==0){ # we have only censored events at this time point
-            tmp.cov <- data[,cov][data[,x]>=f.1$time[i]] # Include the censored ID in covariate list
+            ##tmp.cov <- data[,cov][data[,x]>=f.1$time[i]] # Include the censored ID in covariate list
                                         #print("hi\n")
+            tmp.cov <- tmp.cov.prev
           } else { # Include IDs that survive beyond that time in cov list
             tmp.cov <- data[,cov][data[,x]>f.1$time[i]] 
           }
           tmp.y.cov <- c(tmp.y.cov,do.call(cov.fun,list(tmp.cov)))
                                         #print(mean(tmp))
+          tmp.cov.prev <- tmp.cov
         }
       }
       
@@ -525,7 +535,9 @@ kaplan.plot <-
         }
         real.se <- FALSE
         #censor.lines <- FALSE
-        ylab <- paste(cov.fun,cov)
+        if(!is.na(match(ylab,"Default"))) {
+          ylab <- paste(cov.fun,cov)
+        }
         cen.x0 <- f.1$time[f.1$n.censor>0]
         cen.x1 <- f.1$time[f.1$n.censor>0]
         cen.y0 <- tmp.y[match(f.1$time[f.1$n.censor>0],tmp.x)] -(ylim[2] - ylim[1])*0.01
@@ -539,7 +551,8 @@ kaplan.plot <-
         xyplot(real.data~real.times,
                main=list(tmp.name,cex=tmp.cex),
                ylim = ylim,
-               xlab=xlab,ylab=ylab,
+               xlab=xlab,
+               ylab=if(!is.na(match(ylab,"Default"))){"Survival (%)"}else{ylab},
                real.type=real.type,
                PI.up=PI.up,PI.down=PI.down,
                PI.times=PI.times,

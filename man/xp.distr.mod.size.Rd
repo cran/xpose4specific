@@ -32,7 +32,8 @@
   bootgam/bootscm procedure.
 }
 \usage{
-xp.distr.mod.size(bootgam.obj = NULL, boot.type = NULL, main = NULL, bw = 0.5, xlb = NULL, ...)
+xp.distr.mod.size(bootgam.obj = NULL, boot.type = NULL, 
+                  main = NULL, bw = 0.5, xlb = NULL, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

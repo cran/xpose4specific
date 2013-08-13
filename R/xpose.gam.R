@@ -139,9 +139,12 @@
         ## looks good
       }
     }
-    assign("wts",wts,pos=1)
-    assign("gamdata",gamdata,pos=1)
-    assign("covnams",covnams,pos=1)
+    c1 <- call("assign","wts",wts,pos=1)
+    eval(c1)
+    c2 <- call("assign","gamdata",gamdata,pos=1)
+    eval(c2)
+    c3 <- call("assign","covnams",covnams,pos=1)
+    eval(c3)
 
     ##
     ## Set starting model

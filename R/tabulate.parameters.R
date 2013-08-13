@@ -55,7 +55,7 @@
   
   parameter.list <- create.parameter.list(lstfile)
 
-  attach(parameter.list,warn.conflicts=F)  
+  #attach(parameter.list,warn.conflicts=F)  
 
   ## Set up matrix
     if(any(parameter.list$separval!="" & parameter.list$separval!=0)) {
@@ -105,7 +105,7 @@
     print(ret.mat, file = paste(ans, ".txt", sep = ""))
   }
   
-  detach(parameter.list)
+  #detach(parameter.list)
   
   return(cat(""))  
   
